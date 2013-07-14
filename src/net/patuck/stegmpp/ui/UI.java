@@ -281,5 +281,15 @@ public class UI extends JFrame
 			}
 		});
 	}
+
+	
+	/**
+	 * Get the Steganography UI object.
+	 * @return the Steganography object used by the UI.
+	 */
+	public Steganography getSteganography()
+	{
+		return steganography;
+	}
 	
 }

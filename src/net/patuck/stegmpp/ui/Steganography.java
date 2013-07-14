@@ -127,4 +127,13 @@ public class Steganography extends JFrame
 		
 		b_ok.setBounds(10, y, 50, 30);
 	}
+	
+	/**
+	 * Set the text in the data message box.
+	 * @param message the message to set.
+	 */
+	public void setData(String message)
+	{
+		t_data.setText(message);
+	}
 }

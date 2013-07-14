@@ -14,6 +14,10 @@ public class StegSender
 {
 	private Document tag;
 	
+	/**
+	 * Set encode bits onto the tag to be sent.
+	 * @param tag the tag to encode.
+	 */
 	public StegSender(Document tag)
 	{
 		// Check if message sending over.

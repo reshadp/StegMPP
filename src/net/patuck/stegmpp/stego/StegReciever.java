@@ -4,21 +4,27 @@
  */
 package net.patuck.stegmpp.stego;
 
+import net.patuck.stegmpp.StegMPP;
 import org.jdom2.Document;
 
 /**
- *
+ * 
  * @author reshad
  */
 public class StegReciever
 {
 	Document tag;
 
+	/**
+	 * Get the encoded bits from an incoming tag.
+	 * @param tag the tag to decode. 
+	 */
 	public StegReciever(Document tag)
 	{
 		if (Stego.checkEOT())
 		{
-			Stego.getPlainText();
+			String data = Stego.getPlainText();
+			StegMPP.getUI().getSteganography().setData(data);
 		}
 		else
 		{

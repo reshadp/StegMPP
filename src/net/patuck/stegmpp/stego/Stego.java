@@ -104,6 +104,8 @@ public class Stego
 		
 		setupCypher();
 		String plainText = new String(rabbit.crypt(pt));
+		// Trim EOT character.
+		plainText = plainText.substring(0,plainText.length()-1);
 		System.out.println(plainText);
 		return plainText;
 	}
