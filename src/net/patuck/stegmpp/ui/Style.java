@@ -1,0 +1,18 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.patuck.stegmpp.ui;
+
+/**
+ * This class defines constant styles.
+ * @author reshad
+ */
+public class Style
+{
+	public static final int DEFAULT=0;
+	public static final int SYSTEM=1;
+	public static final int INCOMING=2;
+	public static final int OUTGOING=4;
+	
+}
