@@ -28,7 +28,7 @@ public class Message
 		message.setAttribute("from", from);
 		message.setAttribute("to", to);
 		message.setAttribute("type", "chat");
-		message.setAttribute("id", Session.getId());
+		message.setAttribute("id", Session.getNextId());
 		return new Document(message);
 	}
 	

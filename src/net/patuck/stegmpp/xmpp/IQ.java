@@ -38,11 +38,11 @@ public class IQ
 	{
 		if (to == null)
 		{
-			pw.println("<iq type='" + type + "' id='" + Session.getId() + "'>" + data + "</iq>");
+			pw.println("<iq type='" + type + "' id='" + Session.getNextId() + "'>" + data + "</iq>");
 		}
 		else
 		{
-			pw.println("<iq type='" + type +"' id='" + Session.getId() + "' to='" + to + "'>" + data + "</iq>");
+			pw.println("<iq type='" + type +"' id='" + Session.getNextId() + "' to='" + to + "'>" + data + "</iq>");
 		}
 		pw.flush();
 		try		

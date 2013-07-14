@@ -24,8 +24,9 @@ public class Session
 	}
 	private static PrintWriter pw = null;
 	
-	public static String getId()
+	public static String getNextId()
 	{
+		id++;
 		return Long.toHexString(id);
 	}
 	
