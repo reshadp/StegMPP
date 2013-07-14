@@ -79,9 +79,5 @@ public class Session
 		Session.to = to;
 	}
 	
-	public static void incrementID()
-	{
-		id++;
-	}
 	
 }

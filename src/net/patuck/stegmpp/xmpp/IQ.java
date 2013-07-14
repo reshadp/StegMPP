@@ -56,7 +56,6 @@ public class IQ
 		{
 			Logger.getLogger(IQ.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		Session.incrementID();
 	}
 	
 	
