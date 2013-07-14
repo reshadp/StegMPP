@@ -71,13 +71,14 @@ public class Authentication
 	
 	public static void receiveAuth(org.jdom2.Document tag)
 	{
-		if(tag.getRootElement().getName().equals("success"))
+		switch (tag.getRootElement().getName())
 		{
-			Session.setAuthenticated(true);
-		}
-		else if(tag.getRootElement().getName().equals("failure"))
-		{
-			Session.setAuthenticated(false);
+			case "success":
+				Session.setAuthenticated(true);
+				break;
+			case "failure":
+				Session.setAuthenticated(false);
+				break;
 		}
 		synchronized(StegMPP.getSession())
 		{
