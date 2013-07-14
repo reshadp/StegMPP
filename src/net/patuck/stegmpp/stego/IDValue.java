@@ -4,11 +4,13 @@
  */
 package net.patuck.stegmpp.stego;
 
+import net.patuck.stegmpp.xmpp.Session;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
 /**
- *
+ * 
  * @author reshad
  */
 public class IDValue implements StegMethod
@@ -16,12 +18,12 @@ public class IDValue implements StegMethod
 	
 	/**
 	 * Set encode bits onto the tag to be sent.
-	 * @param tag 
+	 * @param tag the tag to encode.
 	 */
 	@Override
 	public void send(Document tag)
 	{
-		String id = tag.getRootElement().getAttributeValue("id");
+		Attribute id = tag.getRootElement().getAttribute("id");
 		if(id != null)
 		{
 			if(Stego.hasNextBit())
@@ -29,15 +31,18 @@ public class IDValue implements StegMethod
 				if(Stego.getNextBit())
 				{
 					//encode 1 make sure id is odd.
-					if (Long.decode("0x"+id) % 2 == 0)
+					if (Long.decode("0x"+id.getValue()) % 2 == 0)
 					{
-						//reset id
+						id.setValue(Session.getNextId());
 					}
-							
 				}
 				else
 				{
 					// Encode 0 make sure id is even.
+					if (Long.decode("0x"+id.getValue()) % 2 == 1)
+					{
+						id.setValue(Session.getNextId());
+					}
 				}
 			}
 		}
@@ -46,18 +51,17 @@ public class IDValue implements StegMethod
 	
 	/**
 	 * Get the encoded bits from an incoming tag.
-	 * @param tag 
+	 * @param tag the tag to decode.
 	 */
 	@Override
 	public void recieve(Document tag)
 	{
-		Element body = tag.getRootElement().getChild("body");
-		if(body != null)
+		Attribute id = tag.getRootElement().getAttribute("id");
+		if(id != null)
 		{
-			if(body.getText().charAt(0) == ' ')
+			if(Long.decode("0x"+id.getValue()) % 2 == 1)
 			{
 				Stego.setNextBit(true);
-				body.setText(body.getText().substring(1, (body.getText().length())));
 			}
 			else
 			{
