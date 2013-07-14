@@ -75,6 +75,14 @@ public class IQ
 				StegMPP.getSession().notifyAll();
 			}
 		}
+		else if (tag.getRootElement().getAttribute("type").getValue().equals("error"))
+		{
+			System.out.println("error in iq.");
+			synchronized(StegMPP.getSession())
+			{
+				StegMPP.getSession().notifyAll();
+			}
+		}
 		else if(tag.getRootElement().getAttribute("type").getValue().equals("get"))
 		{
 			tag.toString();
