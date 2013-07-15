@@ -4,6 +4,7 @@
  */
 package net.patuck.stegmpp.stego;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class Stego
 		{
 			sender = isSender;
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			byte [] b_key = md.digest(key.getBytes()); 
+			byte [] b_key = md.digest(key.getBytes("UTF-8")); 
 			r_key = Arrays.copyOfRange(b_key, 0, 16);
 			r_iv = Arrays.copyOfRange(b_key, 17, 25);
 			setupCypher();
@@ -48,6 +49,10 @@ public class Stego
 			
 		}
 		catch (NoSuchAlgorithmException ex)
+		{
+			Logger.getLogger(Stego.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (UnsupportedEncodingException ex)
 		{
 			Logger.getLogger(Stego.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -103,7 +108,15 @@ public class Stego
 		
 		
 		setupCypher();
-		String plainText = new String(rabbit.crypt(pt));
+		String plainText="";
+		try
+		{
+			plainText = new String(rabbit.crypt(pt), "UTF-8");
+		}
+		catch (UnsupportedEncodingException ex)
+		{
+			Logger.getLogger(Stego.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		// Trim EOT character.
 		plainText = plainText.substring(0,plainText.length()-1);
 		System.out.println(plainText);

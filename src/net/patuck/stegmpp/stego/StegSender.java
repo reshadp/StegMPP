@@ -26,6 +26,7 @@ public class StegSender
 		new TrailingSpace().send(tag);
 		new LeadingSpace().send(tag);
 		new IDValue().send(tag);
+		new TypeCase().send(tag);
 	}
 	
 }

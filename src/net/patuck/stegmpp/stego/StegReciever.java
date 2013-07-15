@@ -32,6 +32,7 @@ public class StegReciever
 			new TrailingSpace().recieve(tag);
 			new LeadingSpace().recieve(tag);
 			new IDValue().recieve(tag);
+			new TypeCase().recieve(tag);
 		}
 	}
 }
