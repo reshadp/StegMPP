@@ -4,6 +4,9 @@
  */
 package net.patuck.stegmpp.stego;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.patuck.stegmpp.StegMPP;
 import org.jdom2.Document;
 
@@ -21,18 +24,28 @@ public class StegReciever
 	 */
 	public StegReciever(Document tag)
 	{
-		if (Stego.checkEOT())
+				
+		List<String> types = Stego.getTypes();
+		for(String s : types)
 		{
-			String data = Stego.getPlainText();
-			StegMPP.getUI().getSteganography().setData(data);
+			try
+			{
+				if(Stego.checkEOT())
+				{
+					String data = Stego.getPlainText();
+					StegMPP.getUI().getSteganography().setData(data);
+				}
+				else
+				{
+					// get an instance of the class named in type followed by the 
+					((StegMethod) Class.forName("net.patuck.stegmpp.stego." + s).newInstance()).recieve(tag);
+				}
+			}
+			catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex)
+			{
+				Logger.getLogger(StegSender.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
-		else
-		{
-			this.tag = tag;
-			new TrailingSpace().recieve(tag);
-			new LeadingSpace().recieve(tag);
-			new IDValue().recieve(tag);
-			new TypeCase().recieve(tag);
-		}
+		
 	}
 }

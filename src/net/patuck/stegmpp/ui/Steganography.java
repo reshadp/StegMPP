@@ -9,8 +9,11 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +40,11 @@ public class Steganography extends JFrame
 	private JRadioButton r_sender;
 	private JRadioButton r_reciever;
 	private ButtonGroup sendOrRecieve;
+	
+	private JCheckBox cb_leadingSpace;
+	private JCheckBox cb_trailingSpace;
+	private JCheckBox cb_idValue;
+	private JCheckBox cb_typeCase;
 	
 	private JButton b_ok;
 	
@@ -71,6 +79,19 @@ public class Steganography extends JFrame
 		sendOrRecieve.add(r_reciever);
 		panel.add(r_reciever);
 		
+		cb_leadingSpace = new JCheckBox("Leading Space");
+		cb_leadingSpace.setSelected(true);
+		panel.add(cb_leadingSpace);
+		cb_trailingSpace = new JCheckBox("Trailing Space");
+		cb_trailingSpace.setSelected(true);
+		panel.add(cb_trailingSpace);
+		cb_idValue = new JCheckBox("Value of ID attribute");
+		cb_idValue.setSelected(true);
+		panel.add(cb_idValue);
+		cb_typeCase = new JCheckBox("Case of type attribute");
+		cb_typeCase.setSelected(true);
+		panel.add(cb_typeCase);
+		
 		b_ok = new JButton("ok");
 		b_ok.setMargin(new Insets(2, 4, 2, 4));
 		b_ok.addActionListener(new ActionListener() 
@@ -79,7 +100,7 @@ public class Steganography extends JFrame
 			public void actionPerformed(ActionEvent ae)
 			{
 				setVisible(false);
-				Stego.Setup(t_data.getText(), t_key.getText(), r_sender.isSelected());
+				Stego.Setup(t_data.getText(), t_key.getText(), r_sender.isSelected(), getCheckedTypes());
 			}
 		});
 		panel.add(b_ok);
@@ -88,7 +109,7 @@ public class Steganography extends JFrame
 		
 		setContentPane(panel);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(new Dimension(400, 400));
+		setSize(new Dimension(400, 500));
 		setResizable(false);
 		setLocationRelativeTo(null);
 	}
@@ -125,6 +146,22 @@ public class Steganography extends JFrame
 		
 		y += 30;
 		
+		cb_leadingSpace.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_trailingSpace.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_idValue.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_typeCase.setBounds(10, y, 200, 20);
+		
+		y += 30;
+		
 		b_ok.setBounds(10, y, 50, 30);
 	}
 	
@@ -135,5 +172,31 @@ public class Steganography extends JFrame
 	public void setData(String message)
 	{
 		t_data.setText(message);
+	}
+	
+	/**
+	 * Get a list of checkboxes selected by class name of their implementation.
+	 * @return the list of checkboxes.
+	 */
+	private List<String> getCheckedTypes()
+	{
+		List<String> list = new ArrayList<>();
+		if(cb_leadingSpace.isSelected())
+		{
+			list.add("LeadingSpace");
+		}
+		if(cb_trailingSpace.isSelected())
+		{
+			list.add("TrailingSpace");
+		}
+		if(cb_idValue.isSelected())
+		{
+			list.add("IDValue");
+		}
+		if(cb_typeCase.isSelected())
+		{
+			list.add("TypeCase");
+		}
+		return list;
 	}
 }

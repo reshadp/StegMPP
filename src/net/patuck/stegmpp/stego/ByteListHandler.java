@@ -9,7 +9,7 @@ import java.util.BitSet;
 import java.util.List;
 
 /**
- *
+ * This class handles reading and writing to a list of bytes.
  * @author reshad
  */
 public class ByteListHandler 
