@@ -20,7 +20,9 @@ import org.jdom2.output.XMLOutputter;
  */
 public class Message
 {
-	public static Document buildMessage()
+	private Document messageTag;
+	
+	public Message()
 	{
 		Element message = new Element("message");
 		String from = StegMPP.getUI().getConnect().getUsername() + '@' + StegMPP.getUI().getConnect().getServer();
@@ -29,26 +31,56 @@ public class Message
 		message.setAttribute("to", to);
 		message.setAttribute("type", "chat");
 		message.setAttribute("id", Session.getNextId());
-		return new Document(message);
+		messageTag =  new Document(message);
 	}
 	
-	public static Document setMessage(Document tag,String message)
+//	/**
+//	 * build the message.
+//	 * @return The xml document representing the message.
+//	 */
+//	public static Document buildMessage()
+//	{
+//		Element message = new Element("message");
+//		String from = StegMPP.getUI().getConnect().getUsername() + '@' + StegMPP.getUI().getConnect().getServer();
+//		String to = StegMPP.getUI().getConnect().getTo();
+//		message.setAttribute("from", from);
+//		message.setAttribute("to", to);
+//		message.setAttribute("type", "chat");
+//		message.setAttribute("id", Session.getNextId());
+//		return new Document(message);
+//	}
+	
+	/**
+	 * Set the text in the body of the message.
+	 * @param tag The document representing the message
+	 * @param message The message text.
+	 */
+	public void addBody(String message)
 	{
 		Element body=new Element("body");
 		body.addContent(message.trim());//remove leading and trailing whitespace  from the string
-		tag.getRootElement().addContent(body);
 		
+		addElement(body);
+	}
+	
+	/**
+	 * Add an element to the message.
+	 * @param tag
+	 * @param element
+	 */
+	public void addElement(Element element)
+	{
+		messageTag.getRootElement().addContent(element);
+	}
+	
+	public void sendMessage()
+	{
 		
 		if(Stego.isSender())
 		{
-			StegSender ss = new StegSender(tag);
+			StegSender ss = new StegSender(messageTag);
 		}
-		return tag;
-	}
-	
-	public static void sendMessage(Document tag)
-	{
-		String s = new XMLOutputter().outputString(tag);
+		String s = new XMLOutputter().outputString(messageTag);
 		s=s.substring(s.indexOf('>')+1); // get rid of <?xml ?> tag.
 		//System.out.println(s);
 		PrintWriter pw = Session.getPrintWriter();
@@ -56,7 +88,7 @@ public class Message
 		pw.flush();
 	}
 	
-	public static void receiveMessage(org.jdom2.Document tag)
+	public static void receiveMessage(Document tag)
 	{
 		//System.err.println(new XMLOutputter().outputString(tag));
 		if(tag.getRootElement().getAttribute("from") != null &&  tag.getRootElement().getChild("body") != null)

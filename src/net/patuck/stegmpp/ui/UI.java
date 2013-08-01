@@ -271,9 +271,9 @@ public class UI extends JFrame
 			{
 				if(t_message.getText().length() > 0)
 				{
-					Document tag = Message.buildMessage();
-					tag = Message.setMessage(tag, t_message.getText());
-					Message.sendMessage(tag);
+					Message message = new Message();
+					message.addBody(t_message.getText());
+					message.sendMessage();
 					StegMPP.getUI().print("[" + connect.getUsername() + "] ",Style.INCOMING);
 					StegMPP.getUI().println(t_message.getText());
 					t_message.setText("");
