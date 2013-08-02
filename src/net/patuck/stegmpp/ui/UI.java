@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -22,7 +24,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import net.patuck.stegmpp.StegMPP;
 import net.patuck.stegmpp.xmpp.Message;
-import org.jdom2.Document;
+import net.patuck.stegmpp.xmpp.XEP0085;
 
 /**
  *
@@ -87,7 +89,8 @@ public class UI extends JFrame
 		});
 		toolbar.add(b_connection);
 		b_steganography = new JButton("Steganography");
-		b_steganography.addActionListener(new ActionListener() {
+		b_steganography.addActionListener(new ActionListener()
+		{
 			@Override
 			public void actionPerformed(ActionEvent ae)
 			{
@@ -108,6 +111,16 @@ public class UI extends JFrame
 		sp_chatBox.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		window.add(sp_chatBox);
 		t_message = new JTextField();
+		t_message.addKeyListener(new KeyAdapter() 
+		{
+
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				XEP0085 xep =new XEP0085(t_message.getText());
+				new Thread(xep).start();
+			}
+		});
 		
 		window.add(t_message);
 		b_send = new JButton("Send");

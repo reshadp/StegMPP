@@ -68,7 +68,7 @@ public class Steganography extends JFrame
 		l_key = new JLabel("Key:");
 		panel.add(l_key);
 		repaint();
-		t_key = new JTextField();
+		t_key = new JTextField("key");
 		panel.add(t_key);
 		
 		sendOrRecieve = new ButtonGroup();
@@ -76,6 +76,7 @@ public class Steganography extends JFrame
 		sendOrRecieve.add(r_sender);
 		panel.add(r_sender);
 		r_reciever = new JRadioButton("Reciever");
+		r_reciever.setSelected(true);
 		sendOrRecieve.add(r_reciever);
 		panel.add(r_reciever);
 		

@@ -91,9 +91,9 @@ public class Message
 	public static void receiveMessage(Document tag)
 	{
 		//System.err.println(new XMLOutputter().outputString(tag));
-		if(tag.getRootElement().getAttribute("from") != null &&  tag.getRootElement().getChild("body") != null)
+		if(tag.getRootElement().getAttribute("from") != null )
 		{
-			if (!Stego.isSender())
+			if (!Stego.isSender()) //If reciever
 			{
 				StegReciever sr = new StegReciever(tag);
 			}
@@ -101,8 +101,11 @@ public class Message
 			String from = tag.getRootElement().getAttribute("from").getValue();
 			if(from.substring(0, from.indexOf('/')).trim().equals(Session.getTo().trim()))
 			{
-				StegMPP.getUI().print("[" + from.substring(0,from.indexOf('@')) + "] ",Style.OUTGOING);
-				StegMPP.getUI().println(tag.getRootElement().getChild("body").getText());
+				if(tag.getRootElement().getChild("body") != null)
+				{
+					StegMPP.getUI().print("[" + from.substring(0,from.indexOf('@')) + "] ",Style.OUTGOING);
+					StegMPP.getUI().println(tag.getRootElement().getChild("body").getText());
+				}
 			}
 		}
 	}
