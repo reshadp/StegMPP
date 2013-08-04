@@ -83,7 +83,7 @@ public class Message
 		String s = new XMLOutputter().outputString(messageTag);
 		s=s.substring(s.indexOf('>')+1); // get rid of <?xml ?> tag.
 		//System.out.println(s);
-		PrintWriter pw = Session.getPrintWriter();
+		PrintWriter pw = Session.pw;
 		pw.println(s);
 		pw.flush();
 	}
@@ -99,7 +99,7 @@ public class Message
 			}
 			
 			String from = tag.getRootElement().getAttribute("from").getValue();
-			if(from.substring(0, from.indexOf('/')).trim().equals(Session.getTo().trim()))
+			if(from.substring(0, from.indexOf('/')).trim().equals(Session.to.trim()))
 			{
 				if(tag.getRootElement().getChild("body") != null)
 				{

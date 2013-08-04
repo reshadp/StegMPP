@@ -25,7 +25,7 @@ public class Authentication
 	 */
 	public static void setPrintWriter(PrintWriter p)
 	{
-		pw = Session.getPrintWriter();
+		pw = Session.pw;
 	}
 	
 	
@@ -44,7 +44,7 @@ public class Authentication
 				Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		return Session.getAuthenticated();
+		return Session.authenticated;
 	}
 	
 	
@@ -74,10 +74,10 @@ public class Authentication
 		switch (tag.getRootElement().getName())
 		{
 			case "success":
-				Session.setAuthenticated(true);
+				Session.authenticated = true;
 				break;
 			case "failure":
-				Session.setAuthenticated(false);
+				Session.authenticated = false;
 				break;
 		}
 		synchronized(StegMPP.getSession())

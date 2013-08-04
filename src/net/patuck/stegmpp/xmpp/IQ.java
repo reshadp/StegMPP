@@ -24,7 +24,7 @@ public class IQ
 	 */
 	public static void setPrintWriter(PrintWriter p)
 	{
-		pw = Session.getPrintWriter();
+		pw = Session.pw;
 	}
 
 	

@@ -7,7 +7,6 @@ package net.patuck.stegmpp.xmpp;
 import java.io.PrintWriter;
 import net.patuck.stegmpp.StegMPP;
 import net.patuck.stegmpp.ui.Style;
-import org.jdom2.output.XMLOutputter;
 
 /**
  * The presence class handles presence objects.
@@ -40,10 +39,10 @@ public class Presence
 		if(tag.getRootElement().getAttribute("from") != null)
 		{
 			String from = tag.getRootElement().getAttribute("from").getValue();
-			if(from.substring(0, from.indexOf('/')).trim().equals(Session.getTo().trim()))
+			if(from.substring(0, from.indexOf('/')).trim().equals(Session.to.trim()))
 			{
 				StegMPP.getUI().print("[System] ",Style.SYSTEM);
-				StegMPP.getUI().println(Session.getTo()+" Online");
+				StegMPP.getUI().println(Session.to + " Online");
 			}
 		}
 	}

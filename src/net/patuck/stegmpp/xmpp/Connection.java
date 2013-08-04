@@ -136,7 +136,7 @@ public class Connection
 			Thread inThread = new Thread(receiver);
 			inThread.start();
 			PrintWriter pw=new PrintWriter(socket.getOutputStream());
-			Session.setPrintWriter(pw);
+			Session.pw = pw;
 			
 			pw.println("<?xml version='1.0' ?>");
 			pw.flush();
