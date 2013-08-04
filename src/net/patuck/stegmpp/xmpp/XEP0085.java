@@ -16,21 +16,30 @@ import org.jdom2.Namespace;
  */
 public class XEP0085 implements Runnable
 {
+	// Define the available chat state notification elements as per the XEP specification.
 	private static final Element ACTIVE = new  Element("active").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	private static final Element INACTIVE = new  Element("inactive").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	private static final Element GONE = new  Element("gone").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	private static final Element COMPOSING = new  Element("composing").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	private static final Element PAUSED = new  Element("paused").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	
+	// Initialise the currentStatus to COMPOSING to allow the active status to be available on starting the session.
 	private static Element currentStatus = COMPOSING;
 	private static String lastText;
 	private String text;
 	
+	/**
+	 * The XEP0085 class is used to send XEP-0085 chat state notifications.
+	 * @param text the text currently in the message box.
+	 */
 	public XEP0085(String text)
 	{
 		this.text = text;
 	}
 	
+	/**
+	 * Run the thread that checks the status and sends appropriate XEP-0085 notifications.
+	 */
 	@Override
 	public void run()
 	{
@@ -39,9 +48,11 @@ public class XEP0085 implements Runnable
 			currentStatus = ACTIVE;
 			send(ACTIVE);
 			lastText =  text;
-			//wait 2:00 min
-			//if text same
-			//send inactive
+			sleepSeconds(120);
+			if(lastText.equals(text) && currentStatus == PAUSED)
+			{	
+				send(INACTIVE);
+			}
 		}
 		
 		else if(!text.equals(""))
@@ -52,27 +63,35 @@ public class XEP0085 implements Runnable
 				currentStatus = COMPOSING;
 			}
 			lastText =  text;
-			try
-			{
-				synchronized(this)
-				{
-					wait(30000);
-				}
-			}
-			catch (InterruptedException ex)
-			{
-				Logger.getLogger(XEP0085.class.getName()).log(Level.SEVERE, null, ex);
-			}
+			sleepSeconds(30);
 			if(lastText.equals(text) && currentStatus == COMPOSING)
 			{
 				send(PAUSED);
 				currentStatus = PAUSED;
-				//wait 1:30 min 
-				//if text same
-				//send inactive
+				sleepSeconds(90);
+				if(lastText.equals(text) && currentStatus == PAUSED)
+				{
+					send(INACTIVE);
+				}
 			}
 		}
 			
+	}
+	
+	/**
+	 * Pause the thread and sleep for a certain number of seconds.
+	 * @param s The number of seconds to wait
+	 */
+	private void sleepSeconds(long s)
+	{
+		try
+		{
+			Thread.sleep(s * 1000);
+		}
+		catch (InterruptedException ex)
+		{
+			Logger.getLogger(XEP0085.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	/**
