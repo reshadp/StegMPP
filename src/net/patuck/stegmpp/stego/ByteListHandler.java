@@ -14,47 +14,26 @@ import java.util.List;
  */
 public class ByteListHandler 
 {
-	
-	/**
-	 * Main method used to test ByteListHandler
-	 * @param args
-	 */
-	public static void main(String [] args)
-	{
-		
-		System.out.println();
-		byte [] b = {1,2,3};
-		ByteListHandler blh = new ByteListHandler(b);
-		ByteListHandler bl1 = new ByteListHandler();
-		while(blh.hasNextBit())
-		{
-			boolean bool = blh.getNextBit();
-			//System.out.println(bool);
-			bl1.setNextBit(bool);
-		}
-		
-		System.out.println(bl1.getBytes());
-	}
-	
-	
-	private List<Byte> bytes;
-	private BitSet currentbyte;
-	private int position;
-	private int pointer;
+	private BitSet data;
+	private int index;
+	private int length;
 	private boolean eot;
-	
-	
 	
 	/**
 	 * Constructor creates a new ByteListHandler.
-	 * @param bytes the list of Bytes.
+	 * @param data the byte array of data.
 	 */
-	public ByteListHandler(List <Byte> bytes)
+	public ByteListHandler(byte [] data)
 	{
-		this.bytes = bytes;
-		this.position=0;
-		currentbyte = createBitSet(bytes.get(position));
-		eot = false;
+		this.data = BitSet.valueOf(data);
+		index = 0;
+		for(int i = 0; i< data.length;i++)
+		{
+			System.out.println(data[i]);
+		}
+		length = data.length * 8;
+		System.out.println(this.data.length());
+		System.out.println(length);
 	}
 	
 	/**
@@ -62,116 +41,67 @@ public class ByteListHandler
 	 */
 	public ByteListHandler()
 	{
-		this.bytes = new ArrayList<>();
-		this.position=0;
-		currentbyte = new BitSet(8);
-		eot = false;
+		data = new BitSet();
+		index = 0;
 	}
-	
+
 	/**
-	 * Constructor creates a new ByteListHandler.
-	 * @param bytes an array of bytes to make into a list.
-	 */
-	public ByteListHandler(byte [] bytes)
-	{
-		this(byteToList(bytes));
-	}
-	
-	
-	/**
-	 * Get the value of the next Bit.
-	 * @return the boolean value of the next bit. true = 1, fales = 0.
+	 * Get the value of the next bit.
+	 * @return the boolean value of the next bit. true = 1, false = 0. 
 	 */
 	public boolean getNextBit()
 	{
-		if (pointer > 7)
+		if(index % 8 == 0 && index != 0)
 		{
-			//System.out.println();
-			System.out.println(currentbyte.toByteArray()[0]);
-			currentbyte = createBitSet(bytes.get(++position));
+			checkEOT();//print bit.
 		}
-		return currentbyte.get(pointer++);
+		return data.get(index++);
 	}
 	
-	
 	/**
-	 * Has next bit checks if the Byte list has more bits to be read.
-	 * @return true if either the pointer to the BitSet is at the end if the byte
-	 * or if the pointer to the bytelist is at the end.
+	 * Check if there are more bits in the data.
+	 * @return true if there are more bits, false if not.
 	 */
 	public boolean hasNextBit()
 	{
-		if (pointer <= 7 || position < bytes.size()-1 )
+		if(index <= length)
 		{
 			return true;
 		}
-		else
+		return false;
+	}
+	
+	public void setNextBit(boolean b)
+	{
+		data.set(index++, b);
+		if(index % 8 == 0)
 		{
-			return false;
+			checkEOT();
+		}
+	}
+	
+	private void checkEOT()
+	{
+		BitSet currentbyte = new BitSet(8);
+		for (int i=0,j=8; j>0 ; i++, j--)
+		{
+			currentbyte.set(i,data.get(index-j));
+		}
+		if(Stego.endOfTransmissionFound(currentbyte.toByteArray()[0]))
+		{
+			eot = true;
+			System.out.println("EOT");
 		}
 	}
 	
 	/**
-	 * Set the next bit of the Byte.
-	 * Also check for the end of transmission character if the byte is complete.
-	 * @param bit the value of the bit to set true for 1, false for 0.
+	 * Get the list of bytes.
+	 * @return  the list of bytes.
 	 */
-	public void setNextBit(boolean bit)
+	public byte[] getBytes()
 	{
-		
-		if (bit)
-		{
-			currentbyte.set(pointer++);
-		}
-		else
-		{
-			currentbyte.clear(pointer++);
-		}
-		if (pointer > 7)
-		{
-			bytes.add(currentbyte.toByteArray()[0]);
-			pointer = 0;
-			System.out.println(currentbyte.toByteArray()[0]);
-			if (Stego.endOfTransmissionFound(currentbyte.toByteArray()[0]))
-			{
-				eot=true;
-				System.out.println("EOT");
-			}
-			currentbyte = new BitSet(8);
-		}
+		return data.toByteArray();
 	}
-	
-	
-	/**
-	 * Convert an array of bytes to a list of Bytes
-	 * @param array the array of bytes.
-	 * @return The List of Bytes.
-	 */
-	public static List<Byte> byteToList(byte [] array)
-	{
-		List<Byte> list = new ArrayList<>();
-		for (byte b: array)
-		{
-			list.add(b);
-		}
-		return list;
-	}
-	
-	/**
-	 * Convert a List of Bytes to an array of bytes.
-	 * @param list the List of Bytes.
-	 * @return the array of bytes.
-	 */
-	public static byte[] listToByte(List<Byte> list)
-	{
-		byte[] array = new byte[list.size()];
-		for(int i=0; i< list.size();i++)
-		{
-			array[i]=list.get(i);
-		}
-		return array;
-	}
-	
 	
 	/**
 	 * Get the End Of Transmission status
@@ -181,27 +111,7 @@ public class ByteListHandler
 	{
 		return eot;
 	}
-	
-	
-	/**
-	 * Get the list of bytes.
-	 * @return  the list of bytes.
-	 */
-	public List<Byte> getBytes()
-	{
-		return bytes;
-	}
-	
-	/**
-	 * Create a BitSet from a single byte.
-	 * @param b the byte to convert.
-	 * @return the converted BitSet.
-	 */
-	private BitSet createBitSet(byte b)
-	{
-		byte [] by= {b};
-		pointer = 0;
-		return BitSet.valueOf(by);
-	}
 }
+
+
 

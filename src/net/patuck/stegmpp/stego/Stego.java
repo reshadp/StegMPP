@@ -19,7 +19,6 @@ import net.patuck.stegmpp.crypto.Rabbit;
  */
 public class Stego
 {
-	//private static ArrayList<Byte> plainText;
 	private static ByteListHandler data;
 	private static boolean sender;
 	private static List<String> types;
@@ -89,6 +88,7 @@ public class Stego
 	 */
 	public static boolean endOfTransmissionFound(byte b)
 	{
+		System.out.println(b);
 		if (rabbit.decryptChar(b) == '\u0004')
 		{
 			return true;
@@ -114,7 +114,7 @@ public class Stego
 	public static boolean getNextBit()
 	{
 		boolean b = data.getNextBit();
-		//System.out.println(b);
+		System.out.println(b);
 		return b;
 	}
 	
@@ -156,14 +156,14 @@ public class Stego
 	 */
 	public static String getPlainText()
 	{
-		byte [] pt = ByteListHandler.listToByte(data.getBytes());
+		byte [] ct = data.getBytes();
 		
 		
 		setupCypher();
 		String plainText="";
 		try
 		{
-			plainText = new String(rabbit.crypt(pt), "UTF-8");
+			plainText = new String(rabbit.crypt(ct), "UTF-8");
 		}
 		catch (UnsupportedEncodingException ex)
 		{
@@ -171,7 +171,7 @@ public class Stego
 		}
 		// Trim EOT character.
 		plainText = plainText.substring(0,plainText.length()-1);
-		System.out.println(plainText);
+		//System.out.println(plainText);
 		return plainText;
 	}
 

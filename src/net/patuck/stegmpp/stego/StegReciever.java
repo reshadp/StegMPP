@@ -34,6 +34,7 @@ public class StegReciever
 				{
 					String data = Stego.getPlainText();
 					StegMPP.getUI().getSteganography().setData(data);
+					//Send output saying message recieved.
 				}
 				else
 				{
