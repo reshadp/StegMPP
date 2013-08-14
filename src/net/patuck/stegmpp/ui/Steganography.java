@@ -45,6 +45,8 @@ public class Steganography extends JFrame
 	private JCheckBox cb_trailingSpace;
 	private JCheckBox cb_idValue;
 	private JCheckBox cb_typeCase;
+	private JCheckBox cb_langAttribute;
+	private JCheckBox cb_typeAttribute;
 	
 	private JButton b_ok;
 	
@@ -90,8 +92,14 @@ public class Steganography extends JFrame
 		cb_idValue.setSelected(true);
 		panel.add(cb_idValue);
 		cb_typeCase = new JCheckBox("Case of type attribute");
-		cb_typeCase.setSelected(true);
+		cb_typeCase.setSelected(false);
 		panel.add(cb_typeCase);
+		cb_langAttribute = new JCheckBox("xml:lang attribute");
+		cb_langAttribute.setSelected(true);
+		panel.add(cb_langAttribute);
+		cb_typeAttribute = new JCheckBox("Presence of type attribute");
+		cb_typeAttribute.setSelected(true);
+		panel.add(cb_typeAttribute);
 		
 		b_ok = new JButton("ok");
 		b_ok.setMargin(new Insets(2, 4, 2, 4));
@@ -147,19 +155,29 @@ public class Steganography extends JFrame
 		
 		y += 30;
 		
-		cb_leadingSpace.setBounds(10, y, 200, 20);
 		
-		y += 20;
-		
-		cb_trailingSpace.setBounds(10, y, 200, 20);
-		
-		y += 20;
 		
 		cb_idValue.setBounds(10, y, 200, 20);
 		
 		y += 20;
 		
 		cb_typeCase.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_langAttribute.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_typeAttribute.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_leadingSpace.setBounds(10, y, 200, 20);
+		
+		y += 20;
+		
+		cb_trailingSpace.setBounds(10, y, 200, 20);
 		
 		y += 30;
 		
@@ -182,6 +200,18 @@ public class Steganography extends JFrame
 	private List<String> getCheckedTypes()
 	{
 		List<String> list = new ArrayList<>();
+		if(cb_idValue.isSelected())
+		{
+			list.add("IDValue");
+		}
+		if(cb_langAttribute.isSelected())
+		{
+			list.add("LangAttribute");
+		}
+		if(cb_typeAttribute.isSelected())
+		{
+			list.add("TypeAttribute");
+		}
 		if(cb_leadingSpace.isSelected())
 		{
 			list.add("LeadingSpace");
@@ -189,14 +219,6 @@ public class Steganography extends JFrame
 		if(cb_trailingSpace.isSelected())
 		{
 			list.add("TrailingSpace");
-		}
-		if(cb_idValue.isSelected())
-		{
-			list.add("IDValue");
-		}
-		if(cb_typeCase.isSelected())
-		{
-			list.add("TypeCase");
 		}
 		return list;
 	}

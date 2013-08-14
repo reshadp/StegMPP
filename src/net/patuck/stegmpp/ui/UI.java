@@ -111,16 +111,7 @@ public class UI extends JFrame
 		sp_chatBox.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		window.add(sp_chatBox);
 		t_message = new JTextField();
-		t_message.addKeyListener(new KeyAdapter() 
-		{
-
-			@Override
-			public void keyTyped(KeyEvent e)
-			{
-				XEP0085 xep =new XEP0085(t_message.getText());
-				new Thread(xep).start();
-			}
-		});
+		
 		
 		window.add(t_message);
 		b_send = new JButton("Send");
@@ -269,6 +260,17 @@ public class UI extends JFrame
 
 	public void enableMessaging()
 	{
+		t_message.addKeyListener(new KeyAdapter() 
+		{
+
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				XEP0085 xep =new XEP0085(t_message.getText());
+				new Thread(xep).start();
+			}
+		});
+		
 		t_message.addActionListener(new ActionListener()
 		{
 			@Override
