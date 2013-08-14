@@ -24,7 +24,7 @@ public class XEP0085 implements Runnable
 	private static final Element PAUSED = new  Element("paused").setNamespace(Namespace.getNamespace("http://jabber.org/protocol/chatstates"));
 	
 	// Initialise the currentStatus to COMPOSING to allow the active status to be available on starting the session.
-	private static Element currentStatus = COMPOSING;
+	private static Element currentStatus = ACTIVE;
 	private static String lastText;
 	private String text;
 	
@@ -46,11 +46,12 @@ public class XEP0085 implements Runnable
 		if(text.equals("") && (currentStatus == COMPOSING || currentStatus == PAUSED))
 		{
 			currentStatus = ACTIVE;
-			send(ACTIVE);
 			lastText =  text;
+			send(ACTIVE);
 			sleepSeconds(120);
 			if(lastText.equals(text) && currentStatus == PAUSED)
 			{	
+				currentStatus = INACTIVE;
 				send(INACTIVE);
 			}
 		}
@@ -59,18 +60,19 @@ public class XEP0085 implements Runnable
 		{
 			if (currentStatus == ACTIVE || currentStatus == PAUSED)
 			{
-				send(COMPOSING);
 				currentStatus = COMPOSING;
+				send(COMPOSING);
 			}
 			lastText =  text;
-			sleepSeconds(30);
+			sleepSeconds(5); // XEP spec says 30 but looking at existing applications 5 seems more appropriate
 			if(lastText.equals(text) && currentStatus == COMPOSING)
 			{
-				send(PAUSED);
 				currentStatus = PAUSED;
+				send(PAUSED);
 				sleepSeconds(90);
 				if(lastText.equals(text) && currentStatus == PAUSED)
 				{
+					currentStatus = INACTIVE;
 					send(INACTIVE);
 				}
 			}
@@ -99,7 +101,7 @@ public class XEP0085 implements Runnable
 	 * Create a Message object and send the chat state.
 	 * @param e The state to send.
 	 */
-	private void send(Element e)
+	private synchronized void send(Element e)
 	{
 		Message m = new Message();
 		m.addElement(e.clone());

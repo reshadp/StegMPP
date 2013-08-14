@@ -73,7 +73,7 @@ public class Message
 		messageTag.getRootElement().addContent(element);
 	}
 	
-	public void sendMessage()
+	public synchronized void sendMessage()
 	{
 		
 		if(Stego.isSender())
@@ -88,7 +88,7 @@ public class Message
 		pw.flush();
 	}
 	
-	public static void receiveMessage(Document tag)
+	public static synchronized void receiveMessage(Document tag)
 	{
 		//System.err.println(new XMLOutputter().outputString(tag));
 		if(tag.getRootElement().getAttribute("from") != null )
