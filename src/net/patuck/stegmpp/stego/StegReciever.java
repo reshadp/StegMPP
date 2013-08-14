@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.patuck.stegmpp.StegMPP;
+import net.patuck.stegmpp.ui.Style;
 import org.jdom2.Document;
 
 /**
@@ -34,7 +35,8 @@ public class StegReciever
 				{
 					String data = Stego.getPlainText();
 					StegMPP.getUI().getSteganography().setData(data);
-					//Send output saying message recieved.
+					StegMPP.getUI().print("[System] ", Style.SYSTEM);
+					StegMPP.getUI().println("Hidden message received");
 				}
 				else
 				{
