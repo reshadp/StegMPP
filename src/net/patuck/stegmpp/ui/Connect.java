@@ -99,6 +99,15 @@ public class Connect extends JFrame
 		});
 		panel.add(b_connect);
 		b_disconnect = new JButton("Disconnect");
+		b_disconnect.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent ae)
+			{
+				Session.disconnect();
+				setVisible(false);
+			}
+		});
 		panel.add(b_disconnect);
 		
 		Connection connection = Session.getConnection();

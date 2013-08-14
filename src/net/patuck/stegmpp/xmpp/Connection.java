@@ -201,4 +201,12 @@ public class Connection
 		return null;
 		
 	}
+	
+	public void disconnect()
+	{
+		Session.pw.println("</stream:stream>");
+		Session.pw.flush();
+		StegMPP.getUI().print("[System] ",Style.SYSTEM);
+		StegMPP.getUI().println("Disconnected.");
+	}
 }

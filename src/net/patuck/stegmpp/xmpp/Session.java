@@ -44,6 +44,11 @@ public class Session
 		connection.connect();
 	}
 	
+	public static void disconnect()
+	{
+		connection.disconnect();
+	}
+	
 	public static void setupConnection(String usrename, String password, String server, int port)
 	{
 		connection.setUsername(usrename);
