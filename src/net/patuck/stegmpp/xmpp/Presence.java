@@ -42,7 +42,17 @@ public class Presence
 			if(from.substring(0, from.indexOf('/')).trim().equals(Session.to.trim()))
 			{
 				StegMPP.getUI().print("[System] ",Style.SYSTEM);
-				StegMPP.getUI().println(Session.to + " Online");
+				if(tag.getRootElement().getChildText("show") != null)
+				{
+					StegMPP.getUI().println(Session.to + " Online");
+				}
+				else if(tag.getRootElement().getAttributeValue("type") != null )
+				{
+					if(tag.getRootElement().getAttributeValue("type").equals("unavailable") )
+					{
+						StegMPP.getUI().println(Session.to + " Online");
+					}
+				}
 			}
 		}
 	}
