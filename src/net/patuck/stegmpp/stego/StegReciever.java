@@ -35,8 +35,6 @@ public class StegReciever
 				{
 					String data = Stego.getPlainText();
 					StegMPP.getUI().getSteganography().setData(data);
-					StegMPP.getUI().print("[System] ", Style.SYSTEM);
-					StegMPP.getUI().println("Hidden message received");
 				}
 				else
 				{

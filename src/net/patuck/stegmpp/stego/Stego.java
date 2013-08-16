@@ -20,7 +20,7 @@ import net.patuck.stegmpp.crypto.Rabbit;
 public class Stego
 {
 	private static ByteListHandler data;
-	private static boolean sender;
+	private static boolean sender = false;
 	private static List<String> types;
 	private static Rabbit rabbit = new Rabbit();;
 	private static byte [] r_key;
