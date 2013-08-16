@@ -50,7 +50,7 @@ public class Presence
 				{
 					if(tag.getRootElement().getAttributeValue("type").equals("unavailable") )
 					{
-						StegMPP.getUI().println(Session.to + " Online");
+						StegMPP.getUI().println(Session.to + " Offline");
 					}
 				}
 			}
