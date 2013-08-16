@@ -44,7 +44,7 @@ public class Steganography extends JFrame
 	private JCheckBox cb_leadingSpace;
 	private JCheckBox cb_trailingSpace;
 	private JCheckBox cb_idValue;
-	private JCheckBox cb_typeCase;
+//	private JCheckBox cb_typeCase;
 	private JCheckBox cb_langAttribute;
 	private JCheckBox cb_typeAttribute;
 	
@@ -91,9 +91,9 @@ public class Steganography extends JFrame
 		cb_idValue = new JCheckBox("Value of ID attribute");
 		cb_idValue.setSelected(true);
 		panel.add(cb_idValue);
-		cb_typeCase = new JCheckBox("Case of type attribute");
-		cb_typeCase.setSelected(false);
-		panel.add(cb_typeCase);
+//		cb_typeCase = new JCheckBox("Case of type attribute");
+//		cb_typeCase.setSelected(false);
+//		panel.add(cb_typeCase);
 		cb_langAttribute = new JCheckBox("xml:lang attribute");
 		cb_langAttribute.setSelected(true);
 		panel.add(cb_langAttribute);
@@ -159,9 +159,9 @@ public class Steganography extends JFrame
 		
 		cb_idValue.setBounds(10, y, 200, 20);
 		
-		y += 20;
-		
-		cb_typeCase.setBounds(10, y, 200, 20);
+//		y += 20;
+//		
+//		cb_typeCase.setBounds(10, y, 200, 20);
 		
 		y += 20;
 		
