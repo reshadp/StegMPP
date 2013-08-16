@@ -6,6 +6,7 @@ package net.patuck.stegmpp.xmpp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -32,9 +33,9 @@ public class Connection
 	 */
 	public Connection()
 	{
-		username = "usernane";
+		username = "username";
 		password = "password";
-		server = "csvm2c41.kent.ac.uk";
+		server = "localhost";
 		port = 5222;
 	}
 	
@@ -190,9 +191,10 @@ public class Connection
 			return pw;
 			
 		}
-		catch (UnknownHostException ex)
+		catch (UnknownHostException | ConnectException ex)
 		{
-			Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+			StegMPP.getUI().print("[System] ",Style.SYSTEM);
+			StegMPP.getUI().println("Error: wrong hostname, please check the server.");
 		}
 		catch (IOException ex)
 		{
