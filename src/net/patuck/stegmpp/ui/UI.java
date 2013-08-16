@@ -73,7 +73,6 @@ public class UI extends JFrame
 		connect = new Connect();
 		steganography = new Steganography();
 		
-		
 		window = new JPanel();
 		window.setLayout(null);
 		
@@ -111,7 +110,7 @@ public class UI extends JFrame
 		sp_chatBox.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		window.add(sp_chatBox);
 		t_message = new JTextField();
-		
+		t_message.setEnabled(false);
 		
 		window.add(t_message);
 		b_send = new JButton("Send");
@@ -134,6 +133,9 @@ public class UI extends JFrame
 		setContentPane(window);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
+		steganography.setVisible(true); // Default to showing steganography window.
+		
 		repaint();
 	}
 	
@@ -162,6 +164,7 @@ public class UI extends JFrame
 		y += 38;
 		sp_chatBox.setBounds(10, y-5, (windowWidth-25), (windowHeight-y)-60);
 		// Set vertical scroll bar to maximum.
+		t_chatBox.setCaretPosition(t_chatBox.getDocument().getLength());
 		sp_chatBox.getVerticalScrollBar().setValue(sp_chatBox.getVerticalScrollBar().getMaximum());
 		t_chatBox.setSize(sp_chatBox.getSize());
 		
@@ -260,6 +263,7 @@ public class UI extends JFrame
 
 	public void enableMessaging()
 	{
+		t_message.setEnabled(true);
 		t_message.addKeyListener(new KeyAdapter() 
 		{
 
@@ -284,7 +288,7 @@ public class UI extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent ae)
 			{
-				if(t_message.getText().length() > 0)
+				if(t_message.getText().trim().length() > 0)
 				{
 					Message message = new Message();
 					message.addBody(t_message.getText());
