@@ -38,12 +38,12 @@ public class TypeAttribute implements StegMethod
 		Attribute type = tag.getRootElement().getAttribute("type");
 		if(type == null)
 		{
-			//
+			// Set next bit to true if there is no type attribute in the message tag.
 			Stego.setNextBit(true);
 		}
 		else
 		{
-			//
+			// Set next bit to false if there is a type attribute in the message tag.
 			Stego.setNextBit(false);
 		}
 	}

@@ -5,11 +5,11 @@
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
-import net.patuck.stegmpp.StegMPP;
 import net.patuck.stegmpp.stego.StegReciever;
 import net.patuck.stegmpp.stego.StegSender;
 import net.patuck.stegmpp.stego.Stego;
 import net.patuck.stegmpp.ui.Style;
+import net.patuck.stegmpp.ui.UI;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
@@ -25,8 +25,8 @@ public class Message
 	public Message()
 	{
 		Element message = new Element("message");
-		String from = StegMPP.getUI().getConnect().getUsername() + '@' + StegMPP.getUI().getConnect().getServer();
-		String to = StegMPP.getUI().getConnect().getTo();
+		String from = Session.getUsername() + '@' + Session.getServer();
+		String to = UI.getUI().getConnect().getTo();
 		message.setAttribute("from", from);
 		message.setAttribute("to", to);
 		message.setAttribute("type", "chat");
@@ -103,8 +103,8 @@ public class Message
 			{
 				if(tag.getRootElement().getChild("body") != null)
 				{
-					StegMPP.getUI().print("[" + from.substring(0,from.indexOf('@')) + "] ",Style.OUTGOING);
-					StegMPP.getUI().println(tag.getRootElement().getChild("body").getText());
+					UI.getUI().print("[" + from.substring(0,from.indexOf('@')) + "] ",Style.OUTGOING);
+					UI.getUI().println(tag.getRootElement().getChild("body").getText());
 				}
 			}
 		}

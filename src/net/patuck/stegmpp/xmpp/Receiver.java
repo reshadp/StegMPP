@@ -84,6 +84,7 @@ public class Receiver implements Runnable
 
 
 					org.jdom2.Document tag = saxBuilder.build(new StringReader(currentInput));
+					System.out.println(tag.getRootElement().getName());
 					switch(tag.getRootElement().getName())		
 					{
 						case "success":

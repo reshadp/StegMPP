@@ -188,7 +188,7 @@ public class Steganography extends JFrame
 	 * Set the text in the data message box.
 	 * @param message the message to set.
 	 */
-	public void setData(String message)
+	protected void setData(String message)
 	{
 		t_data.setText(message);
 	}

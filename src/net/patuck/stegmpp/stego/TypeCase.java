@@ -6,7 +6,6 @@ package net.patuck.stegmpp.stego;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
-import org.jdom2.Element;
 
 /**
  *

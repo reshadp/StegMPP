@@ -7,7 +7,6 @@ package net.patuck.stegmpp.xmpp;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.patuck.stegmpp.StegMPP;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -33,11 +32,11 @@ public class Authentication
 	{
 		pw.println("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='" + mechanism + "'>" + authPlain(username,password) + "==</auth>");
 		pw.flush();
-		synchronized(StegMPP.getSession())
+		synchronized(Sync.getSyncObject())
 		{
 			try
 			{
-				StegMPP.getSession().wait();
+				Sync.getSyncObject().wait();
 			}
 			catch (InterruptedException ex)
 			{
@@ -80,9 +79,9 @@ public class Authentication
 				Session.authenticated = false;
 				break;
 		}
-		synchronized(StegMPP.getSession())
+		synchronized(Sync.getSyncObject())
 		{
-			StegMPP.getSession().notifyAll();
+			Sync.getSyncObject().notifyAll();
 		}
 	}
 }

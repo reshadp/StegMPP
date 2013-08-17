@@ -4,16 +4,12 @@ package net.patuck.stegmpp.ui;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import net.patuck.stegmpp.StegMPP;
-import net.patuck.stegmpp.xmpp.Connection;
 import net.patuck.stegmpp.xmpp.Session;
 
 /**
@@ -81,11 +77,11 @@ public class Connect extends JFrame
 			public void actionPerformed(ActionEvent ae)
 			{
 				// Setup connection.
-				Connection connection = Session.getConnection();
-				connection.setUsername(getUsername());
-				connection.setPassword(getPassword());
-				connection.setServer(getServer());
-				connection.setPort(Integer.parseInt(getPort()));
+				
+				Session.setUsername(getUsername());
+				Session.setPassword(getPassword());
+				Session.setServer(getServer());
+				Session.setPort(Integer.parseInt(getPort()));
 				if(getTo().indexOf('@') < 0)
 				{
 					setTo(getTo() + '@' + getServer());
@@ -110,11 +106,10 @@ public class Connect extends JFrame
 		});
 		panel.add(b_disconnect);
 		
-		Connection connection = Session.getConnection();
-		t_username.setText(connection.getUsername());
-		t_password.setText(connection.getPassword());
-		t_server.setText(connection.getServer());
-		t_port.setText(String.valueOf(connection.getPort()));
+		t_username.setText(Session.getUsername());
+		t_password.setText(Session.getPassword());
+		t_server.setText(Session.getServer());
+		t_port.setText(String.valueOf(Session.getPort()));
 		t_to.setText(Session.getTo());
 		
 		setContentPane(panel);

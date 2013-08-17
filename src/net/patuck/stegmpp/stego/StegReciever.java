@@ -7,8 +7,7 @@ package net.patuck.stegmpp.stego;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.patuck.stegmpp.StegMPP;
-import net.patuck.stegmpp.ui.Style;
+import net.patuck.stegmpp.ui.UI;
 import org.jdom2.Document;
 
 /**
@@ -34,7 +33,7 @@ public class StegReciever
 				if(Stego.checkEOT())
 				{
 					String data = Stego.getPlainText();
-					StegMPP.getUI().getSteganography().setData(data);
+					UI.getUI().setData(data);
 				}
 				else
 				{

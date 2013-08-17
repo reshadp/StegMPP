@@ -7,7 +7,6 @@ package net.patuck.stegmpp.stego;
 import net.patuck.stegmpp.xmpp.Session;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
-import org.jdom2.Element;
 
 /**
  * 

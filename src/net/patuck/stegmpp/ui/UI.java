@@ -22,7 +22,6 @@ import javax.swing.JToolBar;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import net.patuck.stegmpp.StegMPP;
 import net.patuck.stegmpp.xmpp.Message;
 import net.patuck.stegmpp.xmpp.XEP0085;
 
@@ -37,6 +36,8 @@ public class UI extends JFrame
 	/*
 	 * The build method creates the ui
 	 */
+	
+	private static UI ui = new UI();
 	
 	private Connect connect;
 	private Steganography steganography;
@@ -57,11 +58,15 @@ public class UI extends JFrame
 	/**
 	 * Default constructor which initialises the title.
 	 */
-	public UI()
+	private UI()
 	{
 		super("StegMPP");
 	}
 	
+	public static UI getUI()
+	{
+		return ui;
+	}
 
 	/**
 	 * The build method builds the UI.
@@ -293,8 +298,8 @@ public class UI extends JFrame
 					Message message = new Message();
 					message.addBody(t_message.getText());
 					message.sendMessage();
-					StegMPP.getUI().print("[" + connect.getUsername() + "] ",Style.INCOMING);
-					StegMPP.getUI().println(t_message.getText());
+					print("[" + connect.getUsername() + "] ",Style.INCOMING);
+					println(t_message.getText());
 					t_message.setText("");
 				}
 			}
@@ -302,13 +307,9 @@ public class UI extends JFrame
 	}
 
 	
-	/**
-	 * Get the Steganography UI object.
-	 * @return the Steganography object used by the UI.
-	 */
-	public Steganography getSteganography()
+	public void setData(String data)
 	{
-		return steganography;
+		steganography.setData(data);
 	}
 	
 }

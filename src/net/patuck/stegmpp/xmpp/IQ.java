@@ -7,7 +7,6 @@ package net.patuck.stegmpp.xmpp;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.patuck.stegmpp.StegMPP;
 
 /**
  * The IQ class represents an in
@@ -47,9 +46,9 @@ public class IQ
 		pw.flush();
 		try		
 		{
-			synchronized(StegMPP.getSession())
+			synchronized(Sync.getSyncObject())
 			{
-				StegMPP.getSession().wait();
+				Sync.getSyncObject().wait();
 			}
 		}
 		catch (InterruptedException ex)
@@ -69,17 +68,17 @@ public class IQ
 		if (tag.getRootElement().getAttribute("type").getValue().equals("result"))
 		{
 			
-			synchronized(StegMPP.getSession())
+			synchronized(Sync.getSyncObject())
 			{
-				StegMPP.getSession().notifyAll();
+				Sync.getSyncObject().notifyAll();
 			}
 		}
 		else if (tag.getRootElement().getAttribute("type").getValue().equals("error"))
 		{
 			System.out.println("error in iq.");
-			synchronized(StegMPP.getSession())
+			synchronized(Sync.getSyncObject())
 			{
-				StegMPP.getSession().notifyAll();
+				Sync.getSyncObject().notifyAll();
 			}
 		}
 		else if(tag.getRootElement().getAttribute("type").getValue().equals("get"))

@@ -4,11 +4,9 @@
  */
 package net.patuck.stegmpp.stego;
 
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
-import net.patuck.stegmpp.StegMPP;
 import net.patuck.stegmpp.ui.Style;
+import net.patuck.stegmpp.ui.UI;
 
 /**
  * This class handles reading and writing to a list of bytes.
@@ -98,8 +96,8 @@ public class ByteListHandler
 		{
 			eot = true;
 			System.out.println("EOT");
-			StegMPP.getUI().print("[System] ", Style.SYSTEM);
-			StegMPP.getUI().println("Hidden message received");
+			UI.getUI().print("[System] ", Style.SYSTEM);
+			UI.getUI().println("Hidden message received");
 		}
 	}
 	
