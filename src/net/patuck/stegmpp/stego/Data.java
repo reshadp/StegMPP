@@ -9,10 +9,10 @@ import net.patuck.stegmpp.ui.Style;
 import net.patuck.stegmpp.ui.UI;
 
 /**
- * This class handles reading and writing to a list of bytes.
+ * This class handles encrypted data as a set of bytes.
  * @author reshad
  */
-public class ByteListHandler 
+public class Data 
 {
 	private BitSet data;
 	private int index;
@@ -20,10 +20,10 @@ public class ByteListHandler
 	private boolean eot;
 	
 	/**
-	 * Constructor creates a new ByteListHandler.
+	 * Constructor creates a new Data object with specified data.
 	 * @param data the byte array of data.
 	 */
-	public ByteListHandler(byte [] data)
+	public Data(byte [] data)
 	{
 		this.data = BitSet.valueOf(data);
 		index = 0;
@@ -37,9 +37,9 @@ public class ByteListHandler
 	}
 	
 	/**
-	 * Constructor creates a new ByteListHandler.
+	 * Constructor creates a new empty Data object.
 	 */
-	public ByteListHandler()
+	public Data()
 	{
 		data = new BitSet();
 		index = 0;

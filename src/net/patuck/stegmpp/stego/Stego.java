@@ -19,7 +19,7 @@ import net.patuck.stegmpp.crypto.Rabbit;
  */
 public class Stego
 {
-	private static ByteListHandler data;
+	private static Data data;
 	private static boolean sender = false;
 	private static List<String> types;
 	private static Rabbit rabbit = new Rabbit();;
@@ -28,7 +28,7 @@ public class Stego
 	
 	
 	/**
-	 * This method sets up the steganography both for sender and reciever. 
+	 * This method sets up the steganography both for sender and receiver. 
 	 * @param plainText
 	 * @param key
 	 * @param isSender
@@ -48,11 +48,11 @@ public class Stego
 			if(isSender)
 			{
 				plainText = plainText + '\u0004';
-				data = new ByteListHandler(rabbit.crypt(plainText.getBytes()));
+				data = new Data(rabbit.crypt(plainText.getBytes()));
 			}
 			else
 			{
-				data = new ByteListHandler();
+				data = new Data();
 			}
 			
 			
