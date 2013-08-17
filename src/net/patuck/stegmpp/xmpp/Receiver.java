@@ -24,15 +24,13 @@ public class Receiver implements Runnable
 {
 
 	private BufferedReader br;
-	private final boolean ISRECIEVER;
 
 	
 	
 	
-	public Receiver(InputStream in, boolean isReciever)
+	public Receiver(InputStream in)
 	{
 		br = new BufferedReader(new InputStreamReader(in));
-		ISRECIEVER = isReciever;
 	}
 	
 
@@ -84,7 +82,6 @@ public class Receiver implements Runnable
 
 
 					org.jdom2.Document tag = saxBuilder.build(new StringReader(currentInput));
-					System.out.println(tag.getRootElement().getName());
 					switch(tag.getRootElement().getName())		
 					{
 						case "success":

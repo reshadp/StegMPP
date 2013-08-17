@@ -41,7 +41,7 @@ public class Connection
 		try
 		{
 			socket = new Socket(Session.server, Session.port);
-			Receiver receiver = new Receiver(socket.getInputStream(), false);
+			Receiver receiver = new Receiver(socket.getInputStream());
 			Thread inThread = new Thread(receiver);
 			inThread.start();
 			PrintWriter pw=new PrintWriter(socket.getOutputStream());
