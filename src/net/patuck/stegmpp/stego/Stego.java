@@ -12,7 +12,7 @@ import net.patuck.stegmpp.ui.Style;
 import net.patuck.stegmpp.ui.UI;
 
 /**
- * 
+ * The Stego class handles all the Steganography such as the setup, running and end of the process.
  * @author reshad
  */
 public class Stego
@@ -52,15 +52,8 @@ public class Stego
 			{
 				data = new Data();
 			}
-			
-			
-			
 		}
-		catch (NoSuchAlgorithmException ex)
-		{
-			Logger.getLogger(Stego.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		catch (UnsupportedEncodingException ex)
+		catch (NoSuchAlgorithmException | UnsupportedEncodingException ex)
 		{
 			Logger.getLogger(Stego.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -86,7 +79,6 @@ public class Stego
 	 */
 	public static boolean endOfTransmissionFound(byte b)
 	{
-		System.out.println(b);
 		if (rabbit.decryptChar(b) == '\u0004')
 		{
 			System.out.println("EOT");
@@ -172,7 +164,6 @@ public class Stego
 		}
 		// Trim EOT character.
 		plainText = plainText.substring(0,plainText.length()-1);
-		//System.out.println(plainText);
 		return plainText;
 	}
 

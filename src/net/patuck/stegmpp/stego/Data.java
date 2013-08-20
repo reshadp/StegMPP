@@ -21,6 +21,7 @@ public class Data
 	{
 		this.data = BitSet.valueOf(data);
 		index = 0;
+		// Print the data to be sent for debugging.
 		for(int i = 0; i< data.length;i++)
 		{
 			System.out.println(data[i]);
@@ -47,7 +48,8 @@ public class Data
 	{
 		if(index % 8 == 0 && index != 0)
 		{
-			checkEOT();//print bit.
+			getByte();
+			//checkEOT();//print bit.
 		}
 		return data.get(index++);
 	}
@@ -65,18 +67,25 @@ public class Data
 		return false;
 	}
 	
+	/**
+	 * Set the next bit to the value in the indicated.
+	 * @param b the value to set the bit.
+	 */
 	public void setNextBit(boolean b)
 	{
 		data.set(index++, b);
 		if(index % 8 == 0)
 		{
-			checkEOT();
+			checkEOT(getByte());
 		}
 	}
 	
-	private void checkEOT()
+	/**
+	 * Get the next byte from the last 8 bits read or written from the data BitSet.
+	 * @return the last byte read or written.
+	 */
+	public byte getByte()
 	{
-		//move to get next byte
 		BitSet currentbyte = new BitSet(8);
 		for (int i=0,j=8; j>0 ; i++, j--)
 		{
@@ -87,7 +96,17 @@ public class Data
 		{
 			b = new byte[]{0};
 		}
-		if(Stego.endOfTransmissionFound(b[0]))
+		System.out.println(b[0]); // Print the byte for debugging.
+		return b[0];
+	}
+	
+	/**
+	 * Check if the character is an EOT character by decoding 
+	 * @param b 
+	 */
+	private void checkEOT(byte b)
+	{
+		if(Stego.endOfTransmissionFound(b))
 		{
 			eot = true;
 		}
