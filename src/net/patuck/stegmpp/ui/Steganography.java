@@ -194,8 +194,8 @@ public class Steganography extends JFrame
 	}
 	
 	/**
-	 * Get a list of checkboxes selected by class name of their implementation.
-	 * @return the list of checkboxes.
+	 * Get a list of check-boxes selected by class name of their implementation.
+	 * @return the list of check-boxes selected by the user..
 	 */
 	private List<String> getCheckedTypes()
 	{

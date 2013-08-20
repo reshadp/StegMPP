@@ -26,16 +26,11 @@ import net.patuck.stegmpp.xmpp.Message;
 import net.patuck.stegmpp.xmpp.XEP0085;
 
 /**
- *
  * The UI class is responsible for making the user interface.
- *
  * @author Reshad Patuck
  */
 public class UI extends JFrame
 {
-	/*
-	 * The build method creates the ui
-	 */
 	
 	private static UI ui = new UI();
 	
@@ -55,6 +50,7 @@ public class UI extends JFrame
 	private JTextField t_message;
 	private JButton b_send;
 	
+	
 	/**
 	 * Default constructor which initialises the title.
 	 */
@@ -63,18 +59,22 @@ public class UI extends JFrame
 		super("StegMPP");
 	}
 	
+	
+	/**
+	 * Get the UI object being used.
+	 * @return the UI object.
+	 */
 	public static UI getUI()
 	{
 		return ui;
 	}
 
+	
 	/**
 	 * The build method builds the UI.
 	 */
 	public void build()
 	{
-		
-		
 		connect = new Connect();
 		steganography = new Steganography();
 		
@@ -98,7 +98,7 @@ public class UI extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent ae)
 			{
-				steganography.setVisible(true); //To change body of generated methods, choose Tools | Templates.
+				steganography.setVisible(true);
 			}
 		});
 		toolbar.add(b_steganography);
@@ -122,8 +122,6 @@ public class UI extends JFrame
 		
 		window.add(b_send);
 		
-		
-		
 		addComponentListener(new ComponentAdapter() 
 		{
 			@Override
@@ -139,10 +137,10 @@ public class UI extends JFrame
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
-		steganography.setVisible(true); // Default to showing steganography window.
-		
+		steganography.setVisible(true); // Open the steganography window on startup.
 		repaint();
 	}
+	
 	
 	/**
 	 * Override the paint method to repaint the UI and set the size of components.
@@ -178,6 +176,7 @@ public class UI extends JFrame
 		b_send.setBounds(windowWidth-85, y, 70, 20);
 	}
 
+	
 	/**
 	 * Get the connect ui object.
 	 * @return the connect object used by the UI.
@@ -186,11 +185,6 @@ public class UI extends JFrame
 	{
 		return connect;
 	}
-
-	
-
-	
-	
 	
 	
 	/**
@@ -266,6 +260,10 @@ public class UI extends JFrame
 		print(out + "\n", style);
 	}
 
+	
+	/**
+	 * Enable the message box so the user can start sending messages.
+	 */
 	public void enableMessaging()
 	{
 		t_message.setEnabled(true);
@@ -307,6 +305,10 @@ public class UI extends JFrame
 	}
 
 	
+	/**
+	 * The setData method sets the data received over the covert channel.
+	 * @param data The hidden message received by the program.
+	 */
 	public void setData(String data)
 	{
 		steganography.setData(data);

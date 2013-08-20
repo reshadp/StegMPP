@@ -6,6 +6,7 @@ package net.patuck.stegmpp.ui;
 
 /**
  * This class defines constant styles.
+ * It is used to specify the stile of a message displayed on the ChatBox.
  * @author reshad
  */
 public class Style

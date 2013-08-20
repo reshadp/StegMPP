@@ -36,7 +36,7 @@ public class Connect extends JFrame
 	
 	/**
 	 * Default constructor.
-	 * sets the title and makes the Connect frame.
+	 * Sets the title and makes the Connect frame.
 	 */
 	public Connect()
 	{
@@ -76,15 +76,14 @@ public class Connect extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent ae)
 			{
-				// Setup connection.
-				
+				// Setup the session.
 				Session.setUsername(getUsername());
 				Session.setPassword(getPassword());
 				Session.setServer(getServer());
 				Session.setPort(Integer.parseInt(getPort()));
-				if(getTo().indexOf('@') < 0)
+				if(t_to.getText().indexOf('@') < 0)
 				{
-					setTo(getTo() + '@' + getServer());
+					t_to.setText(t_to.getText() + '@' + getServer());
 				}
 				Session.setTo(getTo());
 				setVisible(false);
@@ -100,12 +99,14 @@ public class Connect extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent ae)
 			{
+				// Disconnect the sesion.
 				Session.disconnect();
 				setVisible(false);
 			}
 		});
 		panel.add(b_disconnect);
 		
+		// Populate data.
 		t_username.setText(Session.getUsername());
 		t_password.setText(Session.getPassword());
 		t_server.setText(Session.getServer());
@@ -116,14 +117,13 @@ public class Connect extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(350, 210);
 		setLocationRelativeTo(null);
-		//setVisible(true);
 		repaint();
 	}
 	
 	
 	/**
 	 * Draw the components.
-	 * @param g Graphics object
+	 * @param g Graphics object.
 	 */
 	@Override
 	public void paint(Graphics g)
@@ -158,12 +158,14 @@ public class Connect extends JFrame
 	
 	/**
 	 * Getter method to get the username.
-	 * @return the username
+	 * @return the username.
 	 */
 	public String getUsername()
 	{
 		return t_username.getText();
 	}
+	
+	
 	/**
 	 * Getter method to get the password.
 	 * Changes the password from a char array to a string.
@@ -173,6 +175,8 @@ public class Connect extends JFrame
 	{
 		return String.copyValueOf(t_password.getPassword());
 	}
+	
+	
 	/**
 	 * Getter method to get the server.
 	 * @return the server.
@@ -181,8 +185,10 @@ public class Connect extends JFrame
 	{
 		return t_server.getText();
 	}
+	
+	
 	/**
-	 * getter method to get the port number.
+	 * Getter method to get the port number.
 	 * Change the port number to a string.
 	 * @return the pot number.
 	 */
@@ -190,15 +196,15 @@ public class Connect extends JFrame
 	{
 		return t_port.getText();
 	}
-
+	
+	
+	/**
+	 * Getter method to get the to field.
+	 * @return the value of the to field.
+	 */
 	public String getTo()
 	{
 		return t_to.getText();
-	}
-	
-	public void setTo(String to)
-	{
-		t_to.setText(to);
 	}
 	
 }
