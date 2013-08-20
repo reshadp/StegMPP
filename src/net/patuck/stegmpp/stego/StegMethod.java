@@ -1,17 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import org.jdom2.Document;
 
 /**
- *
+ * The StegMethod interface defines an interface for each method of steganography to implement.
  * @author reshad
  */
 public interface StegMethod
 {
+	/**
+	 * The send method encodes some bits in the message tag.
+	 * @param tag the message tag.
+	 */
 	public void send(Document tag);
-	public void recieve(Document tag);
+	
+	/**
+	 *The receive method decodes bits from an incoming message tag.
+	 * @param tag the message tag.
+	 */
+	public void receive(Document tag);
 }

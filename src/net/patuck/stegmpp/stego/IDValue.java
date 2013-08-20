@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import net.patuck.stegmpp.xmpp.Session;
@@ -9,14 +5,14 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 
 /**
- * 
+ * Encode one bit of data in the value of the id attribute of the message tag.
  * @author reshad
  */
 public class IDValue implements StegMethod
 {
 	
 	/**
-	 * Set encode bits onto the tag to be sent.
+	 * Encode one bit in the id attribute of the message tag.
 	 * @param tag the tag to encode.
 	 */
 	@Override
@@ -29,7 +25,7 @@ public class IDValue implements StegMethod
 			{
 				if(Stego.getNextBit())
 				{
-					//encode 1 make sure id is odd.
+					// Encode 1 make sure id is odd.
 					if (Long.decode("0x"+id.getValue()) % 2 == 0)
 					{
 						id.setValue(Session.getNextId());
@@ -49,21 +45,23 @@ public class IDValue implements StegMethod
 
 	
 	/**
-	 * Get the encoded bits from an incoming tag.
+	 * Decode one bit in the id attribute of the message tag.
 	 * @param tag the tag to decode.
 	 */
 	@Override
-	public void recieve(Document tag)
+	public void receive(Document tag)
 	{
 		Attribute id = tag.getRootElement().getAttribute("id");
 		if(id != null)
 		{
 			if(Long.decode("0x"+id.getValue()) % 2 == 1)
 			{
+				// Decode odd value of id attribute as 1.
 				Stego.setNextBit(true);
 			}
 			else
 			{
+				// Decode even value of id attribute as 0.
 				Stego.setNextBit(false);
 			}
 		}

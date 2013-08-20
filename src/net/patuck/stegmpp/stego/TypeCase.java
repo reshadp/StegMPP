@@ -1,22 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 
 /**
- *
+ * Encode and decode one bit of data in the case of the value of the type attribute.
  * @author reshad
  */
+@Deprecated
 public class TypeCase implements StegMethod
 {
 	
 	/**
-	 * 
-	 * @param tag 
+	 * Encode one bit of data in the case of the type attribute.
+	 * @param tag the message tag.
 	 */
 	@Override
 	public void send(Document tag)
@@ -38,21 +35,23 @@ public class TypeCase implements StegMethod
 
 	
 	/**
-	 * 
-	 * @param tag 
+	 * Decode one bit of data from the case of the type attribute.
+	 * @param tag the message tag.
 	 */
 	@Override
-	public void recieve(Document tag)
+	public void receive(Document tag)
 	{
 		Attribute type = tag.getRootElement().getAttribute("type");
 		if(type != null)
 		{
 			if(type.getValue().equals("CHAT"))
 			{
+				// Decode type = "CHAT" as 1.
 				Stego.setNextBit(true);
 			}
 			else
 			{
+				// Decode type="chat" as 0.
 				Stego.setNextBit(false);
 			}
 		}

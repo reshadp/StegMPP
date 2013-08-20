@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import java.util.List;
@@ -10,7 +6,7 @@ import java.util.logging.Logger;
 import org.jdom2.Document;
 
 /**
- *
+ * The StegSender class is used to encode bits onto a tag using the selected methods for steganography.
  * @author reshad
  */
 public class StegSender
@@ -28,7 +24,7 @@ public class StegSender
 		{
 			try
 			{
-				// get an instance of the class named in type followed by the 
+				// Get an instance of the class named in the type list and call its send method.
 				((StegMethod) Class.forName("net.patuck.stegmpp.stego." + s).newInstance()).send(tag);
 			}
 			catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex)

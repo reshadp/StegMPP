@@ -1,7 +1,7 @@
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
-import net.patuck.stegmpp.stego.StegReciever;
+import net.patuck.stegmpp.stego.StegReceiver;
 import net.patuck.stegmpp.stego.StegSender;
 import net.patuck.stegmpp.stego.Stego;
 import net.patuck.stegmpp.ui.Style;
@@ -82,9 +82,9 @@ public class Message
 		//System.err.println(new XMLOutputter().outputString(tag));
 		if(tag.getRootElement().getAttribute("from") != null )
 		{
-			if (!Stego.isSender()) //If reciever
+			if (!Stego.isSender()) //If receiver
 			{
-				StegReciever sr = new StegReciever(tag);
+				StegReceiver sr = new StegReceiver(tag);
 			}
 			
 			String from = tag.getRootElement().getAttribute("from").getValue();

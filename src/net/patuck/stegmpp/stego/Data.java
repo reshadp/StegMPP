@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import java.util.BitSet;
-import net.patuck.stegmpp.ui.Style;
-import net.patuck.stegmpp.ui.UI;
 
 /**
  * This class handles encrypted data as a set of bytes.
@@ -82,6 +76,7 @@ public class Data
 	
 	private void checkEOT()
 	{
+		//move to get next byte
 		BitSet currentbyte = new BitSet(8);
 		for (int i=0,j=8; j>0 ; i++, j--)
 		{
@@ -95,9 +90,6 @@ public class Data
 		if(Stego.endOfTransmissionFound(b[0]))
 		{
 			eot = true;
-			System.out.println("EOT");
-			UI.getUI().print("[System] ", Style.SYSTEM);
-			UI.getUI().println("Hidden message received");
 		}
 	}
 	

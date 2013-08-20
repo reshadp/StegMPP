@@ -34,8 +34,8 @@ public class Steganography extends JFrame
 	private JTextField t_key;
 	
 	private JRadioButton r_sender;
-	private JRadioButton r_reciever;
-	private ButtonGroup sendOrRecieve;
+	private JRadioButton r_receiver;
+	private ButtonGroup sendOrReceive;
 	
 	private JCheckBox cb_leadingSpace;
 	private JCheckBox cb_trailingSpace;
@@ -69,14 +69,14 @@ public class Steganography extends JFrame
 		t_key = new JTextField("key");
 		panel.add(t_key);
 		
-		sendOrRecieve = new ButtonGroup();
+		sendOrReceive = new ButtonGroup();
 		r_sender =  new JRadioButton("Sender");
-		sendOrRecieve.add(r_sender);
+		sendOrReceive.add(r_sender);
 		panel.add(r_sender);
-		r_reciever = new JRadioButton("Reciever");
-		r_reciever.setSelected(true);
-		sendOrRecieve.add(r_reciever);
-		panel.add(r_reciever);
+		r_receiver = new JRadioButton("Receiver");
+		r_receiver.setSelected(true);
+		sendOrReceive.add(r_receiver);
+		panel.add(r_receiver);
 		
 		cb_leadingSpace = new JCheckBox("Leading Space");
 		cb_leadingSpace.setSelected(true);
@@ -147,7 +147,7 @@ public class Steganography extends JFrame
 		y += 30;
 		
 		r_sender.setBounds(10, y, 80, 20);
-		r_reciever.setBounds(100, y, 100, 20);
+		r_receiver.setBounds(100, y, 100, 20);
 		
 		y += 30;
 		

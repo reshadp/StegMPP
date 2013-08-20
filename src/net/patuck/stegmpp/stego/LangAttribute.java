@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import org.jdom2.Document;
@@ -9,7 +5,7 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 
 /**
- *
+ * Encode and decode one bit in as the presence or absence of the lang attribute in the body of a message.
  * @author reshad
  */
 public class LangAttribute implements StegMethod
@@ -43,17 +39,19 @@ public class LangAttribute implements StegMethod
 	 * @param tag the message tag.
 	 */
 	@Override
-	public void recieve(Document tag)
+	public void receive(Document tag)
 	{
 		Element body = tag.getRootElement().getChild("body");
 		if(body != null)
 		{
 			if(body.getAttributeValue("lang", Namespace.XML_NAMESPACE) == null)
 			{
+				// Decode absence of lang attribute as 0.
 				Stego.setNextBit(false);
 			}
 			else
 			{
+				// Decode presence of lang attribute as 1.
 				Stego.setNextBit(true);
 			}
 		}

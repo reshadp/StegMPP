@@ -1,20 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.output.XMLOutputter;
 
 /**
- *
+ * Encode and decode one bit in as the presence or absence of a space at the end of the message.
  * @author reshad
  */
 public class TrailingSpace implements StegMethod
 {
 
+	/**
+	 * Encode one bit in the presence or absence of a space at the end of the message.
+	 * @param tag the message tag.
+	 */
 	@Override
 	public void send(Document tag)
 	{
@@ -33,19 +32,25 @@ public class TrailingSpace implements StegMethod
 		}
 	}
 
+	/**
+	 * Decode one bit in the presence or absence of a space at the end of the message.
+	 * @param tag the message tag.
+	 */
 	@Override
-	public void recieve(Document tag)
+	public void receive(Document tag)
 	{
 		Element body = tag.getRootElement().getChild("body");
 		if(body != null)
 		{
 			if(body.getText().charAt(body.getText().length() - 1 ) == ' ')
 			{
+				// Decode space at the end as 1.
 				Stego.setNextBit(true);
 				body.setText(body.getText().substring(0, (body.getText().length() - 1)));
 			}
 			else
 			{
+				// Decode no space at the end as 0.
 				Stego.setNextBit(false);
 			}
 		}

@@ -1,22 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
 
 /**
- * This class handles the steganography using a leading space in the body of the message.
+ * Encode and decode one bit in as the presence or absence of a space at the beginning of the message.
  * @author reshad
  */
 public class LeadingSpace implements StegMethod
 {
 	
 	/**
-	 * Set encode bits onto the tag to be sent.
-	 * @param tag 
+	 * Encode one bit in the presence or absence of a space at the beginning of the message.
+	 * @param tag the message tag.
 	 */
 	@Override
 	public void send(Document tag)
@@ -41,22 +37,24 @@ public class LeadingSpace implements StegMethod
 
 	
 	/**
-	 * Get the encoded bits from an incoming tag.
-	 * @param tag 
+	 * Decode one bit in the presence or absence of a space at the beginning of the message.
+	 * @param tag the message tag.
 	 */
 	@Override
-	public void recieve(Document tag)
+	public void receive(Document tag)
 	{
 		Element body = tag.getRootElement().getChild("body");
 		if(body != null)
 		{
 			if(body.getText().charAt(0) == ' ')
 			{
+				// Decode space at the begining as 1.
 				Stego.setNextBit(true);
 				body.setText(body.getText().substring(1, (body.getText().length())));
 			}
 			else
 			{
+				// Decode no space at the beginning as 0.
 				Stego.setNextBit(false);
 			}
 		}

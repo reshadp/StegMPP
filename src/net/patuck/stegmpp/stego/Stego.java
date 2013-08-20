@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.stego;
 
 import java.io.UnsupportedEncodingException;
@@ -12,6 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.patuck.stegmpp.crypto.Rabbit;
+import net.patuck.stegmpp.ui.Style;
+import net.patuck.stegmpp.ui.UI;
 
 /**
  * 
@@ -91,6 +89,9 @@ public class Stego
 		System.out.println(b);
 		if (rabbit.decryptChar(b) == '\u0004')
 		{
+			System.out.println("EOT");
+			UI.getUI().print("[System] ", Style.SYSTEM);
+			UI.getUI().println("Hidden message received");
 			return true;
 		}
 		return false;
