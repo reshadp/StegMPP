@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 /**
  * The RegularExpressions class contains a list of final regular expressions.
- * 
- * anything with the suffix ST allows 
- * 
+ * The regular expressions defined here are used to catch cases which can't be parsed by the XML parser easily.
  * @author reshad
  */
 public class RegularExpressions
 {
-
+	
+	/**
+	 * The opening xml tag.
+	 */
 	public static final String XML =
 			  "(<)"			// Open tag
 			+ "(\\?)"		// Questionmark(?) character
@@ -21,6 +18,9 @@ public class RegularExpressions
 			+ ".*?"			// Non-greedy match on filler
 			+ "(>)";		// Close tag
 	
+	/**
+	 * The stream tag which is only closed at the end of the session.
+	 */
 	public static final String OPEN_STREAM =
 			  "(<)"			// Begin tag
 			+ "(stream)"	// Word "stream"
@@ -30,6 +30,9 @@ public class RegularExpressions
 			+ ".*?"			// Non-greedy match on filler
 			+ "(>)";		// Close tag
 	
+	/**
+	 * The features tag which is not easy to process with the XML parser.
+	 */
 	public static final String STREAM_FRETURES =
 			  "(<)"			// Begin tag
 			+ "(stream)"	// Word "stream"

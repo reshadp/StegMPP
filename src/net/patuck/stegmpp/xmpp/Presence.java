@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
@@ -29,10 +25,10 @@ public class Presence
 	}
 	
 	
-	public static void sendPresence()
-	{
-		
-	}
+	/**
+	 * Process received presence information from the server.
+	 * @param tag The presence tag to process.
+	 */
 	public static void receivePresence(org.jdom2.Document tag)
 	{
 		

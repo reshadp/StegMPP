@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
@@ -34,25 +30,9 @@ public class Message
 		messageTag =  new Document(message);
 	}
 	
-//	/**
-//	 * build the message.
-//	 * @return The xml document representing the message.
-//	 */
-//	public static Document buildMessage()
-//	{
-//		Element message = new Element("message");
-//		String from = StegMPP.getUI().getConnect().getUsername() + '@' + StegMPP.getUI().getConnect().getServer();
-//		String to = StegMPP.getUI().getConnect().getTo();
-//		message.setAttribute("from", from);
-//		message.setAttribute("to", to);
-//		message.setAttribute("type", "chat");
-//		message.setAttribute("id", Session.getNextId());
-//		return new Document(message);
-//	}
 	
 	/**
 	 * Set the text in the body of the message.
-	 * @param tag The document representing the message
 	 * @param message The message text.
 	 */
 	public void addBody(String message)
@@ -63,16 +43,20 @@ public class Message
 		addElement(body);
 	}
 	
+	
 	/**
 	 * Add an element to the message.
-	 * @param tag
-	 * @param element
+	 * @param element The element to add to the message.
 	 */
 	public void addElement(Element element)
 	{
 		messageTag.getRootElement().addContent(element);
 	}
 	
+	
+	/**
+	 * Send the message.
+	 */
 	public synchronized void sendMessage()
 	{
 		
@@ -88,6 +72,11 @@ public class Message
 		pw.flush();
 	}
 	
+	
+	/**
+	 * Handle received messages.
+	 * @param tag The received message tag.
+	 */
 	public static synchronized void receiveMessage(Document tag)
 	{
 		//System.err.println(new XMLOutputter().outputString(tag));

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.BufferedReader;
@@ -17,23 +13,28 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 /**
- *
+ * The Receiver class implements the Receiver thread which handles all incoming messages.
  * @author reshad
  */
 public class Receiver implements Runnable
 {
 
 	private BufferedReader br;
-
 	
 	
-	
+	/**
+	 * The Receiver constructor creates a new Receiver object and sets the BuffeterReader object to read from the specified InputStream.
+	 * @param in The InputStream to read from.
+	 */
 	public Receiver(InputStream in)
 	{
 		br = new BufferedReader(new InputStreamReader(in));
 	}
 	
 
+	/**
+	 * The run method runs once the connection to the server is established and is used to get and identify the type of incoming message.
+	 */
 	@Override
 	public void run()
 	{
@@ -58,22 +59,24 @@ public class Receiver implements Runnable
 				if (in == '>')
 				{
 
+					// Print debug information.
 					//System.out.println(currentInput);
 					//System.out.println(in);
 
+					// Regex Matching for xml input with namespaces and cases where the XML is not complete(eg: the open stream tag which is only closed when the cilent disconnects).
 					if (currentInput.matches(RegularExpressions.OPEN_STREAM))
 					{
-						System.out.println("OPEN_STREAM test passed");
+						//System.out.println("OPEN_STREAM test passed");
 						input.clear();
 					}
 					else if (currentInput.matches(RegularExpressions.XML))
 					{
-						System.out.println("XML test passed");
+						//System.out.println("XML test passed");
 						input.clear();
 					}
 					else if (currentInput.matches(RegularExpressions.STREAM_FRETURES))
 					{
-						System.out.println("STREAM_FRETURES test passed");
+						//System.out.println("STREAM_FRETURES test passed");
 						input.clear();
 					}
 
@@ -113,7 +116,7 @@ public class Receiver implements Runnable
 			}
 			catch (JDOMException ex)
 			{
-				
+				;
 			}
 
 		}

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
@@ -23,11 +19,22 @@ public class Session
 	static String server = "localhost";
 	static int port = 5222;
 	
+	
+	/**
+	 * Getter method to get to.
+	 * @return the to value.
+	 */
 	public static String getTo()
 	{
 		return to;
 	}
 	
+	
+	/**
+	 * Getter method to get the next ID value.
+	 * increment the id value before returning it.
+	 * @return the next id value.
+	 */
 	public static String getNextId()
 	{
 		id++;
@@ -115,40 +122,37 @@ public class Session
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Getter method to get the connection object.
+	 * @return the connection object.
+	 */
 	public static Connection getConnection()
 	{
 		return connection;
 	}
 	
 	/**
-	 * Start the connection.
+	 * Connect to the server.
 	 */
 	public static void connect()
 	{
 		connection.connect();
 	}
 	
+	
+	/**
+	 * Disconnect from the server.
+	 */
 	public static void disconnect()
 	{
 		connection.disconnect();
 	}
 	
 	
-
+	/**
+	 * Setter method for to
+	 * @param to the new value for the to attribute.
+	 */
 	public static void setTo(String to)
 	{
 		Session.to = to;

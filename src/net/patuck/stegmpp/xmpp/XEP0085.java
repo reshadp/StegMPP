@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.util.logging.Level;
@@ -43,12 +39,12 @@ public class XEP0085 implements Runnable
 	@Override
 	public void run()
 	{
-		if(text.equals("") && (currentStatus == COMPOSING || currentStatus == PAUSED))
+		if(text.equals("") && (currentStatus == COMPOSING || currentStatus == PAUSED || currentStatus ==INACTIVE))
 		{
 			currentStatus = ACTIVE;
 			lastText =  text;
 			send(ACTIVE);
-			sleepSeconds(120);
+			sleepSeconds(120); // Wait 120 seconds before sending Inactive.
 			if(lastText.equals(text) && currentStatus == PAUSED)
 			{	
 				currentStatus = INACTIVE;
@@ -64,12 +60,12 @@ public class XEP0085 implements Runnable
 				send(COMPOSING);
 			}
 			lastText =  text;
-			sleepSeconds(5); // XEP spec says 30 but looking at existing applications 5 seems more appropriate
+			sleepSeconds(5); // XEP spec says 30 seconds but looking at existing applications 5 seconds seems more appropriate.
 			if(lastText.equals(text) && currentStatus == COMPOSING)
 			{
 				currentStatus = PAUSED;
 				send(PAUSED);
-				sleepSeconds(90);
+				sleepSeconds(90); // Wait 90 seconds before sending Inactive.
 				if(lastText.equals(text) && currentStatus == PAUSED)
 				{
 					currentStatus = INACTIVE;

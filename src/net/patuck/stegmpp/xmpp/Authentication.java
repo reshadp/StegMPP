@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
@@ -27,7 +23,13 @@ public class Authentication
 		pw = Session.pw;
 	}
 	
-	
+	/**
+	 * 
+	 * @param mechanism The type of authentication mechanism (only "PLAIN" supported in this implementation, but can be extended to support other SASL mechanisms).
+	 * @param username The username of the user to validate.
+	 * @param password The password of the user to validate.
+	 * @return true if the user has been authenticated successfully, false if the user has failed to authenticate successfully.
+	 */
 	public static boolean sendAuth(String mechanism, String username, String password)
 	{
 		pw.println("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='" + mechanism + "'>" + authPlain(username,password) + "==</auth>");
@@ -46,7 +48,12 @@ public class Authentication
 		return Session.authenticated;
 	}
 	
-	
+	/**
+	 * The authPlain method returns the SASL authentication string for a given username and password combination using the SASL PLAIN authentication mechanism.
+	 * @param u The username to authenticate against.
+	 * @param p The password to authenticate with. 
+	 * @return  The SASL PLAIN authentication string.
+	 */
 	private static String authPlain(String u,String p)
 	{
 		sun.misc.BASE64Encoder en = new BASE64Encoder();
@@ -68,6 +75,10 @@ public class Authentication
 		return en.encode(l);
 	}
 	
+	/**
+	 * Process the authentication response from the server.
+	 * @param tag The success or failure tag.
+	 */
 	public static void receiveAuth(org.jdom2.Document tag)
 	{
 		switch (tag.getRootElement().getName())

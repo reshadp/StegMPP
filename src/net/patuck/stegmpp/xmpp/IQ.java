@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.patuck.stegmpp.xmpp;
 
 import java.io.PrintWriter;
@@ -46,6 +42,7 @@ public class IQ
 		pw.flush();
 		try		
 		{
+			// Wait for response from server. typically notrequired but makes life easier.
 			synchronized(Sync.getSyncObject())
 			{
 				Sync.getSyncObject().wait();
@@ -65,25 +62,25 @@ public class IQ
 	 */
 	public static void receiveIQ(org.jdom2.Document tag)
 	{
-		if (tag.getRootElement().getAttribute("type").getValue().equals("result"))
+		switch (tag.getRootElement().getAttribute("type").getValue())
 		{
-			
-			synchronized(Sync.getSyncObject())
-			{
-				Sync.getSyncObject().notifyAll();
-			}
-		}
-		else if (tag.getRootElement().getAttribute("type").getValue().equals("error"))
-		{
-			System.out.println("error in iq.");
-			synchronized(Sync.getSyncObject())
-			{
-				Sync.getSyncObject().notifyAll();
-			}
-		}
-		else if(tag.getRootElement().getAttribute("type").getValue().equals("get"))
-		{
-			tag.toString();
+			case "result":
+				synchronized(Sync.getSyncObject())
+				{
+					Sync.getSyncObject().notifyAll();
+				}
+				break;
+			case "error":
+				System.out.println("error in iq.");
+				synchronized(Sync.getSyncObject())
+				{
+					Sync.getSyncObject().notifyAll();
+				}
+				break;
+			case "get":
+				// Ignore get messages. This is just a proof of concept and not a fully functional XMPP Client.
+				//tag.toString();
+				break;
 		}
 		
 	}
