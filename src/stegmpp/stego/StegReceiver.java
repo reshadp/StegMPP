@@ -34,7 +34,7 @@ public class StegReceiver
 				else
 				{
 					// Get an instance of the class named in the type list and call its receive method. 
-					((StegMethod) Class.forName("net.patuck.stegmpp.stego." + s).newInstance()).receive(tag);
+					((StegMethod) Class.forName("stegmpp.stego." + s).newInstance()).receive(tag);
 				}
 			}
 			catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex)

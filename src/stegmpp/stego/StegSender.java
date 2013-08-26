@@ -25,7 +25,7 @@ public class StegSender
 			try
 			{
 				// Get an instance of the class named in the type list and call its send method.
-				((StegMethod) Class.forName("net.patuck.stegmpp.stego." + s).newInstance()).send(tag);
+				((StegMethod) Class.forName("stegmpp.stego." + s).newInstance()).send(tag);
 			}
 			catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex)
 			{
