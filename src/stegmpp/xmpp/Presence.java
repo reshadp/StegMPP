@@ -1,6 +1,5 @@
 package stegmpp.xmpp;
 
-import java.io.PrintWriter;
 import stegmpp.ui.Style;
 import stegmpp.ui.UI;
 
@@ -10,20 +9,6 @@ import stegmpp.ui.UI;
  */
 public class Presence
 {
-	
-	
-	private static PrintWriter pw=null;
-
-	
-	/**
-	 * Set the PrintWriter to write to the XMPP server.
-	 * @param p the PrintWriter object.
-	 */
-	public static void setPrintWriter(PrintWriter p)
-	{
-		pw = p;
-	}
-	
 	
 	/**
 	 * Process received presence information from the server.
@@ -35,16 +20,16 @@ public class Presence
 		if(tag.getRootElement().getAttribute("from") != null)
 		{
 			String from = tag.getRootElement().getAttribute("from").getValue();
-			if(from.substring(0, from.indexOf('/')).trim().equals(Session.to.trim()))
+			if(from.substring(0, from.indexOf('/')).trim().equals(Session.to.trim())) // Check if the from field in the pressence tag is the same as the id we are messaging.
 			{
 				UI.getUI().print("[System] ",Style.SYSTEM);
 				if(tag.getRootElement().getChildText("show") != null)
 				{
 					UI.getUI().println(Session.to + " Online");
 				}
-				else if(tag.getRootElement().getAttributeValue("type") != null )
+				else if(tag.getRootElement().getAttributeValue("type") != null)
 				{
-					if(tag.getRootElement().getAttributeValue("type").equals("unavailable") )
+					if(tag.getRootElement().getAttributeValue("type").equals("unavailable"))
 					{
 						UI.getUI().println(Session.to + " Offline");
 					}

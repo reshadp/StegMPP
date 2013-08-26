@@ -36,6 +36,7 @@ public class Receiver implements Runnable
 	 * The run method runs once the connection to the server is established and is used to get and identify the type of incoming message.
 	 */
 	@Override
+	@SuppressWarnings("empty-statement")
 	public void run()
 	{
 
@@ -66,17 +67,14 @@ public class Receiver implements Runnable
 					// Regex Matching for xml input with namespaces and cases where the XML is not complete(eg: the open stream tag which is only closed when the cilent disconnects).
 					if (currentInput.matches(RegularExpressions.OPEN_STREAM))
 					{
-						//System.out.println("OPEN_STREAM test passed");
 						input.clear();
 					}
 					else if (currentInput.matches(RegularExpressions.XML))
 					{
-						//System.out.println("XML test passed");
 						input.clear();
 					}
 					else if (currentInput.matches(RegularExpressions.STREAM_FRETURES))
 					{
-						//System.out.println("STREAM_FRETURES test passed");
 						input.clear();
 					}
 
@@ -101,9 +99,9 @@ public class Receiver implements Runnable
 							break;
 						case "message":
 							Message.receiveMessage(tag);
-							//System.out.println(currentInput);
 							break;
 						default:
+							// Print the name of the unimplemented tag.
 							System.err.println(tag.getRootElement().getName());
 					}
 					input.clear();
@@ -116,7 +114,7 @@ public class Receiver implements Runnable
 			}
 			catch (JDOMException ex)
 			{
-				;
+				;// Do not do anything as this exception occours regularly(every time until the full message is recieved.
 			}
 
 		}

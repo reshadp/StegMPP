@@ -50,21 +50,25 @@ public class Connect extends JFrame
 		t_username = new JTextField();
 		t_username.addFocusListener(new FocusEventHandler());
 		panel.add(t_username);
+		
 		l_password = new JLabel("Password:");
 		panel.add(l_password);
 		t_password = new JPasswordField();
 		t_password.addFocusListener(new FocusEventHandler());
 		panel.add(t_password);
+		
 		l_server = new JLabel("Server:");
 		panel.add(l_server);
 		t_server = new JTextField();
 		t_server.addFocusListener(new FocusEventHandler());
 		panel.add(t_server);
+		
 		l_port = new JLabel("Port:");
 		panel.add(l_port);
 		t_port = new JTextField();
 		t_port.addFocusListener(new FocusEventHandler());
 		panel.add(t_port);
+		
 		l_to = new JLabel("To:");
 		panel.add(l_to);
 		t_to = new JTextField();
@@ -91,8 +95,10 @@ public class Connect extends JFrame
 				// Connect to server.
 				Session.connect();
 			}
-		});
+		}
+		);
 		panel.add(b_connect);
+		
 		b_disconnect = new JButton("Disconnect");
 		b_disconnect.addActionListener(new ActionListener() 
 		{
@@ -103,7 +109,8 @@ public class Connect extends JFrame
 				Session.disconnect();
 				setVisible(false);
 			}
-		});
+		}
+		);
 		panel.add(b_disconnect);
 		
 		// Populate data.
@@ -136,21 +143,24 @@ public class Connect extends JFrame
 		
 		l_username.setBounds(c1, y, 80, 10);
 		t_username.setBounds(c2, y-5, 250 ,20);
+		
 		y += 30;
 		l_password.setBounds(c1, y, 80, 10);
 		t_password.setBounds(c2, y-5, 250 ,20);
+		
 		y += 30;
 		l_server.setBounds(c1, y, 80, 10);
 		t_server.setBounds(c2, y-5, 250 ,20);
+		
 		y += 30;
 		l_port.setBounds(c1, y, 80, 10);
 		t_port.setBounds(c2, y-5, 250 ,20);
+		
 		y += 30;
 		l_to.setBounds(c1, y, 80, 10);
 		t_to.setBounds(c2, y-5, 250 ,20);
 		
 		y += 25;
-		
 		b_connect.setBounds(30,y,120,20);
 		b_disconnect.setBounds(200, y, 120, 20);
 	}

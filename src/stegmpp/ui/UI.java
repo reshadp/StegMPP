@@ -90,7 +90,8 @@ public class UI extends JFrame
 			{
 				connect.setVisible(true);
 			}
-		});
+		}
+		);
 		toolbar.add(b_connection);
 		b_steganography = new JButton("Steganography");
 		b_steganography.addActionListener(new ActionListener()
@@ -100,10 +101,10 @@ public class UI extends JFrame
 			{
 				steganography.setVisible(true);
 			}
-		});
+		}
+		);
 		toolbar.add(b_steganography);
 		window.add(toolbar);
-		
 		
 		t_chatBox = new JTextPane();
 		t_chatBox.setEditable(false);
@@ -114,12 +115,12 @@ public class UI extends JFrame
 		sp_chatBox.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		sp_chatBox.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		window.add(sp_chatBox);
+		
 		t_message = new JTextField();
 		t_message.setEnabled(false);
-		
 		window.add(t_message);
-		b_send = new JButton("Send");
 		
+		b_send = new JButton("Send");
 		window.add(b_send);
 		
 		addComponentListener(new ComponentAdapter() 
@@ -168,7 +169,7 @@ public class UI extends JFrame
 		sp_chatBox.setBounds(10, y-5, (windowWidth-25), (windowHeight-y)-60);
 		// Set vertical scroll bar to maximum.
 		t_chatBox.setCaretPosition(t_chatBox.getDocument().getLength());
-		sp_chatBox.getVerticalScrollBar().setValue(sp_chatBox.getVerticalScrollBar().getMaximum());
+		// Set the size of the Text pane to that of the scroll pane.
 		t_chatBox.setSize(sp_chatBox.getSize());
 		
 		y += (windowHeight-y)-60;
@@ -221,7 +222,6 @@ public class UI extends JFrame
 			sd.insertString(sd.getLength(), out, s);
 			
 			repaint();
-			//t_chatBox.applyComponentOrientation(s);
 		}
 		catch (BadLocationException ex)
 		{
@@ -276,7 +276,8 @@ public class UI extends JFrame
 				XEP0085 xep =new XEP0085(t_message.getText());
 				new Thread(xep).start();
 			}
-		});
+		}
+		);
 		
 		t_message.addActionListener(new ActionListener()
 		{
@@ -285,7 +286,9 @@ public class UI extends JFrame
 			{
 				b_send.getActionListeners()[0].actionPerformed(ae);
 			}
-		});
+		}
+		);
+		
 		b_send.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -301,7 +304,8 @@ public class UI extends JFrame
 					t_message.setText("");
 				}
 			}
-		});
+		}
+		);
 	}
 
 	

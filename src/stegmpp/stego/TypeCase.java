@@ -6,6 +6,7 @@ import org.jdom2.Document;
 /**
  * Encode and decode one bit of data in the case of the value of the type attribute.
  * @author reshad
+ * @deprecated this method is detectable.
  */
 @Deprecated
 public class TypeCase implements StegMethod

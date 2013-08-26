@@ -17,7 +17,7 @@ public class Sync
 		return sync;
 	}
 	
-	/*
+	/**
 	 * Declare a private constructor to override the default constructor.
 	 */
 	private Sync()

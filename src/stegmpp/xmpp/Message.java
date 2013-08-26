@@ -18,6 +18,10 @@ public class Message
 {
 	private Document messageTag;
 	
+	/**
+	 * Message constructor.
+	 * Makes a new message object and sets the to, from, type and id attributes.
+	 */
 	public Message()
 	{
 		Element message = new Element("message");
@@ -38,8 +42,8 @@ public class Message
 	public void addBody(String message)
 	{
 		Element body=new Element("body");
-		body.addContent(message.trim());//remove leading and trailing whitespace  from the string
-		
+		// Remove leading and trailing whitespace by trimming the message String.
+		body.addContent(message.trim());
 		addElement(body);
 	}
 	
@@ -82,7 +86,7 @@ public class Message
 		//System.err.println(new XMLOutputter().outputString(tag));
 		if(tag.getRootElement().getAttribute("from") != null )
 		{
-			if (!Stego.isSender()) //If receiver
+			if (!Stego.isSender()) //If Receiver.
 			{
 				StegReceiver sr = new StegReceiver(tag);
 			}

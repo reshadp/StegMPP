@@ -11,7 +11,7 @@ import stegmpp.ui.Style;
 import stegmpp.ui.UI;
 
 /**
- *
+ * The connection class handles connecting and disconnecting from an XMPP Server.
  * @author reshad
  */
 public class Connection
@@ -28,27 +28,27 @@ public class Connection
 	public PrintWriter connect()
 	{
 		
-		
 		ui.print("[System] ",Style.SYSTEM);
 		ui.println("Connecting to XMPP Server");
-		
-		
 		
 		try
 		{
 			socket = new Socket(Session.server, Session.port);
+			// Create and start a new Receiver thread.
 			Receiver receiver = new Receiver(socket.getInputStream());
 			Thread inThread = new Thread(receiver);
 			inThread.start();
+			
 			PrintWriter pw=new PrintWriter(socket.getOutputStream());
 			Session.pw = pw;
 			
+			// Create connection.
 			pw.println("<?xml version='1.0' ?>");
 			pw.flush();
 			pw.println("<stream:stream to='" + Session.server + "' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>");
 			pw.flush();
 			
-			
+			// Authentication.
 			ui.print("[System] ",Style.SYSTEM);
 			Authentication.setPrintWriter(pw);
 			if(Authentication.sendAuth("PLAIN", Session.username, Session.username))
@@ -65,7 +65,7 @@ public class Connection
 			pw.println("<stream:stream to='" + Session.server + "' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>");
 			pw.flush();
 			
-			
+			// Send IQ requests.
 			IQ.setPrintWriter(pw);
 			IQ.sendIQ("set", null, "<bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'/>");
 			IQ.sendIQ("set", null, "<session xmlns='urn:ietf:params:xml:ns:xmpp-session'/>");
@@ -80,17 +80,11 @@ public class Connection
 			IQ.sendIQ("get", "pubsub." + Session.server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
 		//	IQ.sendIQ("get", "vjud." + server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
 
-			
+			// Send presence.
 			pw.println("<presence><priority>1</priority><show>chat</show></presence>");
 			pw.flush();
 			
-//			pw.println("<presence><priority>1</priority><c xmlns='http://jabber.org/protocol/caps' node='http://pidgin.im/' hash='sha-1' ver='AcN1/PEN8nq7AHD+9jpxMV4U6YM=' ext='voice-v1 camera-v1 video-v1'/><x xmlns='vcard-temp:x:update'/></presence>");
-//			pw.flush();
-//			pw.println("");
-//			pw.flush();
-//			pw.println("");
-//			pw.flush();
-			//whole bunch of iq to query server status
+			// Enable messaging.
 			ui.enableMessaging();
 			return pw;
 			
@@ -108,6 +102,9 @@ public class Connection
 		
 	}
 	
+	/**
+	 * The disconnect method is used to end the XML stream and disconnect form the server.
+	 */
 	public void disconnect()
 	{
 		Session.pw.println("</stream:stream>");

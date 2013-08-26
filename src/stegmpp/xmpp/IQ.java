@@ -55,7 +55,6 @@ public class IQ
 	}
 	
 	
-	
 	/**
 	 * Read and process the IQ tag.
 	 * @param tag the IQ tag.

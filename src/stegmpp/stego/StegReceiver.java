@@ -12,8 +12,6 @@ import org.jdom2.Document;
  */
 public class StegReceiver
 {
-	Document tag;
-
 	/**
 	 * Get the encoded bits from an incoming tag.
 	 * @param tag the tag to decode. 

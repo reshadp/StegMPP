@@ -10,9 +10,7 @@ import org.jdom2.Document;
  * @author reshad
  */
 public class StegSender
-{
-	private Document tag;
-	
+{	
 	/**
 	 * Set encode bits onto the tag to be sent.
 	 * @param tag the tag to encode.
