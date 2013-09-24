@@ -74,10 +74,10 @@ public class Connection
 			IQ.sendIQ("get", null, "<query xmlns='jabber:iq:roster'/>");
 			IQ.sendIQ("get", Session.server, "<query xmlns='http://jabber.org/protocol/disco#items' node='http://jabber.org/protocol/commands'/>");
 		//	IQ.sendIQ("get", null, "<blocklist xmlns='urn:xmpp:blocking'/>");
-		//	iq.sendIQ("get", "proxy.eu.jabber.org", "<query xmlns='http://jabber.org/protocol/bytestreams'/>");
-			IQ.sendIQ("get", "conference." + Session.server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
+		//	IQ.sendIQ("get", "proxy.eu.jabber.org", "<query xmlns='http://jabber.org/protocol/bytestreams'/>");
+		//	IQ.sendIQ("get", "conference." + Session.server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
 		//	IQ.sendIQ("get", "irc." + server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
-			IQ.sendIQ("get", "pubsub." + Session.server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
+		//	IQ.sendIQ("get", "pubsub." + Session.server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
 		//	IQ.sendIQ("get", "vjud." + server, "<query xmlns='http://jabber.org/protocol/disco#info'/>");
 
 			// Send presence.
