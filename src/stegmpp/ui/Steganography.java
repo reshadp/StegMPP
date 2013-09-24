@@ -153,22 +153,22 @@ public class Steganography extends JFrame
 		r_receiver.setBounds(100, y, 100, 20);
 		
 		y += 30;
-		cb_idValue.setBounds(10, y, 200, 20);
+		cb_idValue.setBounds(10, y, 300, 20);
 		
 //		y += 20;
 //		cb_typeCase.setBounds(10, y, 200, 20);
 		
 		y += 20;
-		cb_langAttribute.setBounds(10, y, 200, 20);
+		cb_langAttribute.setBounds(10, y, 300, 20);
 		
 		y += 20;
-		cb_typeAttribute.setBounds(10, y, 200, 20);
+		cb_typeAttribute.setBounds(10, y, 300, 20);
 		
 		y += 20;
-		cb_leadingSpace.setBounds(10, y, 200, 20);
+		cb_leadingSpace.setBounds(10, y, 300, 20);
 		
 		y += 20;
-		cb_trailingSpace.setBounds(10, y, 200, 20);
+		cb_trailingSpace.setBounds(10, y, 300, 20);
 		
 		y += 30;
 		b_ok.setBounds(10, y, 50, 30);
