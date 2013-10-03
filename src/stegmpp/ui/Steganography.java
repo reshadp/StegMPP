@@ -122,7 +122,6 @@ public class Steganography extends JFrame
 		repaint();
 		setContentPane(panel);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(new Dimension(400, 500));
 		setResizable(false);
 		setLocationRelativeTo(null);
 	}
@@ -137,16 +136,17 @@ public class Steganography extends JFrame
 	{
 		super.paint(g);
 		int y = 10;
+		int width = 400;
 		
 		l_data.setBounds(10, y, 100, 20);
 		
 		y += 20;
-		sp_data.setBounds(10, y, getWidth()-20, 200);
-		t_data.setSize(getWidth()-20, 200);
+		sp_data.setBounds(10, y, width - 20, 200);
+		t_data.setSize(width - 20, 200);
 		
 		y += 210;
 		l_key.setBounds(10, y, 50, 20);
-		t_key.setBounds(50, y, getWidth()-60, 20);
+		t_key.setBounds(50, y, width - 60, 20);
 		
 		y += 30;
 		r_sender.setBounds(10, y, 80, 20);
@@ -172,6 +172,9 @@ public class Steganography extends JFrame
 		
 		y += 30;
 		b_ok.setBounds(10, y, 50, 30);
+		
+		y += 50;
+		setSize(new Dimension(width, y + 10));
 	}
 	
 	/**
