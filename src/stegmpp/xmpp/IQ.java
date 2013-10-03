@@ -3,6 +3,7 @@ package stegmpp.xmpp;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jdom2.Element;
 
 /**
  * The IQ class represents an in
@@ -77,7 +78,18 @@ public class IQ
 				}
 				break;
 			case "get":
-				// Ignore get messages. This is just a proof of concept and not a fully functional XMPP Client.
+				for(Element element:tag.getRootElement().getChildren())
+				{
+					// Respond to ping.
+					if(element.getName().equals("ping"))
+					{
+						System.out.println("PONG");
+						pw.println("<iq from='" + tag.getRootElement().getAttributeValue("to") + "' to='" + tag.getRootElement().getAttributeValue("from") + "' id='" + tag.getRootElement().getAttributeValue("id") + "' type='result'/>");
+						pw.flush();
+					}
+				}
+				
+				// Ignore other get messages. This is just a proof of concept and not a fully functional XMPP Client.
 				//tag.toString();
 				break;
 		}
