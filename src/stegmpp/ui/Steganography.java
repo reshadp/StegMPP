@@ -43,6 +43,7 @@ public class Steganography extends JFrame
 	private JCheckBox cb_typeCase;
 	private JCheckBox cb_langAttribute;
 	private JCheckBox cb_typeAttribute;
+	private JCheckBox cb_typeValue;
 	
 	private JButton b_ok;
 	
@@ -105,6 +106,10 @@ public class Steganography extends JFrame
 		cb_typeAttribute.setSelected(true);
 		panel.add(cb_typeAttribute);
 		
+		cb_typeValue = new JCheckBox("Value of type attribute");
+		cb_typeValue.setSelected(true);
+		panel.add(cb_typeValue);
+		
 		b_ok = new JButton("ok");
 		b_ok.setMargin(new Insets(2, 4, 2, 4));
 		b_ok.addActionListener(new ActionListener() 
@@ -165,6 +170,9 @@ public class Steganography extends JFrame
 		cb_typeAttribute.setBounds(10, y, 300, 20);
 		
 		y += 20;
+		cb_typeValue.setBounds(10, y, 300, 20);
+		
+		y += 20;
 		cb_leadingSpace.setBounds(10, y, 300, 20);
 		
 		y += 20;
@@ -216,6 +224,10 @@ public class Steganography extends JFrame
 		if(cb_typeCase.isSelected())
 		{
 			list.add("TypeCase");
+		}
+		if(cb_typeValue.isSelected())
+		{
+			list.add("TypeValue");
 		}
 		return list;
 	}
