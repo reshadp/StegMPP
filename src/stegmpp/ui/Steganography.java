@@ -42,6 +42,7 @@ public class Steganography extends JFrame
 	private JCheckBox cb_idValue;
 	private JCheckBox cb_typeCase;
 	private JCheckBox cb_langAttribute;
+	private JCheckBox cb_langValue;
 	private JCheckBox cb_typeAttribute;
 	private JCheckBox cb_typeValue;
 	
@@ -101,6 +102,10 @@ public class Steganography extends JFrame
 		cb_langAttribute = new JCheckBox("xml:lang attribute");
 		cb_langAttribute.setSelected(true);
 		panel.add(cb_langAttribute);
+		
+		cb_langValue = new JCheckBox("xml:lang value");
+		cb_langValue.setSelected(true);
+		panel.add(cb_langValue);
 		
 		cb_typeAttribute = new JCheckBox("Presence of type attribute");
 		cb_typeAttribute.setSelected(true);
@@ -167,6 +172,9 @@ public class Steganography extends JFrame
 		cb_langAttribute.setBounds(10, y, 300, 20);
 		
 		y += 20;
+		cb_langValue.setBounds(10, y, 300, 20);
+		
+		y += 20;
 		cb_typeAttribute.setBounds(10, y, 300, 20);
 		
 		y += 20;
@@ -208,6 +216,10 @@ public class Steganography extends JFrame
 		if(cb_langAttribute.isSelected())
 		{
 			list.add("LangAttribute");
+		}
+		if(cb_langValue.isSelected())
+		{
+			list.add("LangValue");
 		}
 		if(cb_typeAttribute.isSelected())
 		{
